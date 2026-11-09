@@ -124,17 +124,6 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 .action.primary{border:0;background:linear-gradient(130deg,#ffe6a3,#d8943a);color:#4b1220}
 #status{font-size:.66rem;color:#e4c5a0;line-height:1.5;margin:10px 0 0;min-height:1em}
 #fireworkCanvas{position:fixed;inset:0;width:100%;height:100%;z-index:80;pointer-events:none}
-#prankSurprise{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:20px;background:#030208ed;backdrop-filter:blur(12px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .35s,visibility .35s}
-#prankSurprise.show{opacity:1;visibility:visible;pointer-events:auto}
-.prank-card{width:min(100%,460px);max-height:min(92dvh,850px);overflow:auto;padding:22px 20px;text-align:center;border:1px solid #efc36e;background:radial-gradient(circle at 50% 0%,#71202b,#170b15 70%);box-shadow:0 20px 70px #000;border-radius:18px;animation:prankPop .55s cubic-bezier(.2,.9,.2,1) both}
-@keyframes prankPop{from{transform:scale(.65) rotate(-5deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
-.prank-burst{font-size:1.6rem;color:#ffd36d;letter-spacing:.5em;animation:prankTwinkle .7s ease-in-out infinite alternate}
-@keyframes prankTwinkle{to{transform:scale(1.13);filter:drop-shadow(0 0 15px #ffb13d)}}
-.prank-video-wrap{width:min(100%,360px);margin:14px auto 16px;padding:5px;border:1px solid #efc36e;background:linear-gradient(135deg,#ffe6a3,#9a5a2b,#f7d17d);border-radius:12px;box-shadow:0 10px 30px #0009}
-#prankVideo{display:block;width:100%;max-height:42dvh;aspect-ratio:4/3;object-fit:contain;background:#08060a;border-radius:7px}
-.prank-card h2{font:900 clamp(1.8rem,8vw,2.8rem) var(--serif);color:#ffe2a0;margin:10px 0;text-shadow:0 4px 0 #8a2d20}
-.prank-card p{color:#f6d9bd;font-size:.85rem;margin:0 0 15px}
-.prank-card .action{margin-top:6px}
 @media(min-width:760px){.photo-reveal{width:300px}.editor{margin-top:28px}.showcase-card{width:min(42vw,470px)}#welcome{padding-bottom:130px}}
 @media(max-width:650px){#opening{padding:18px 14px}.opening-ui{padding-top:34px}.editor{margin-top:21px}.photo-reveal{width:min(74vw,340px)}#welcome{padding:90px 14px 125px}.skyline{height:145px}.hanging-ornament{right:4%;top:41%;width:92px;height:126px}.showcase-card{width:min(82vw,430px)}.showcase-caption{font-size:.9rem}#finalWish{padding:18px 16px}}
 @media(max-height:720px){.opening-ui{padding-top:8px}.editor{margin-top:10px}.photo-reveal{width:min(52vw,270px)}#welcome{padding-top:72px;padding-bottom:105px}.welcome-main{margin-top:0}.welcome-heading{margin:8px 0}.hanging-ornament{top:35%}}
@@ -176,18 +165,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}
   </div><div class="showcase-caption" id="showcaseCaption">A little surprise for Someone Special</div></div>
  </section>
 <div id="brand" aria-hidden="true"><div class="brand-lockup"><span class="symbol">✺</span><strong>Faah.fun</strong><small>A LITTLE DIWALI SURPRISE</small></div></div>
-<audio id="prankAudio" preload="auto" src="assets/diwali/fahhhhh.mp3"></audio>
-<div id="prankSurprise" role="dialog" aria-modal="true" aria-labelledby="prankTitle">
- <div class="prank-card"><div class="prank-burst">✦ ✧ ✦</div>
-  <div class="eyebrow">YOU FOUND THE SURPRISE</div><h2 id="prankTitle">Jethalal's Diwali Masti!</h2>
-  <div class="prank-video-wrap"><video id="prankVideo" playsinline preload="metadata" controls>
-   <source src="assets/diwali/jethalal-surprise.mp4" type="video/mp4">
-   Your browser cannot play this surprise video.
-  </video></div>
-  <p>A little unexpected Diwali masti for you. Sound on! 🔊</p>
-  <button class="action primary" id="closePrank">Continue ✨</button>
- </div>
-</div>
+<audio id="faahSound" preload="auto" src="assets/diwali/fahhhhh.mp3"></audio>
 
 <section class="scene" id="welcome" aria-label="Swagatam welcome screen">
  <svg class="bunting" viewBox="0 0 1000 180" preserveAspectRatio="none" aria-hidden="true">
@@ -289,18 +267,33 @@ button,input,textarea{font:inherit}button{cursor:pointer}
   const points=[[.18,.25],[.82,.28],[.5,.72],[.16,.7],[.84,.68],[.5,.16]];
   points.forEach((p,k)=>setTimeout(()=>burst(innerWidth*p[0],innerHeight*p[1],k===2?125:88),350+k*900));
  }
+ let logoTransitionStarted=false,logoFallbackTimer=0;
  function finishPhotoShow(){
-  const video=$("revealVideo");
-  if(video&&!video.ended)video.pause();
+  if(logoTransitionStarted)return;
+  logoTransitionStarted=true;
+  const video=$("revealVideo"),sound=$("faahSound");
+  if(video)video.pause();
   $("brand").classList.add("show");
-  setTimeout(()=>{$("photoShow").classList.remove("active");$("welcome").classList.add("active");$("brand").classList.remove("show")},950);
+  let advanced=false;
+  const continueToWelcome=()=>{
+   if(advanced)return;
+   advanced=true;clearTimeout(logoFallbackTimer);
+   $("photoShow").classList.remove("active");
+   $("welcome").classList.add("active");
+   $("brand").classList.remove("show");
+  };
+  sound.pause();sound.currentTime=0;sound.volume=1;
+  sound.onended=continueToWelcome;
+  const soundPromise=sound.play();
+  logoFallbackTimer=setTimeout(continueToWelcome,5000);
+  if(soundPromise&&soundPromise.catch)soundPromise.catch(()=>setTimeout(continueToWelcome,1800));
  }
  $("revealVideo").addEventListener("ended",finishPhotoShow);
  $("revealVideo").addEventListener("error",()=>{$("revealVideoFallback").classList.remove("hidden");status("The reveal video could not load. Please check the video asset path.")});
  function openReveal(){
   if(opened)return;opened=true;
   const revealVideo=$("revealVideo");
-  revealVideo.pause();revealVideo.currentTime=0;revealVideo.muted=false;revealVideo.volume=1;
+  revealVideo.pause();revealVideo.currentTime=0;revealVideo.muted=false;revealVideo.defaultMuted=false;revealVideo.volume=1;
   const playPromise=revealVideo.play();
   if(playPromise&&playPromise.catch)playPromise.catch(()=>{$("revealVideoFallback").classList.remove("hidden");revealVideo.controls=true;status("Tap the video inside the frame to start playback with sound.")});
   $("opening").classList.add("curtain-open");$("openingUI").classList.add("dismiss");
@@ -310,27 +303,18 @@ button,input,textarea{font:inherit}button{cursor:pointer}
  function popOrnament(){
   if(popped)return;popped=true;
   const r=$("ornamentBtn").getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;
-  burst(x,y,160);fireworkSound();setTimeout(()=>burst(x-65,y-25,65),130);setTimeout(()=>burst(x+65,y+25,65),260);
+  burst(x,y,160);
+  setTimeout(()=>burst(x-65,y-25,65),130);
+  setTimeout(()=>burst(x+65,y+25,65),260);
   $("ornamentBtn").classList.add("popped");
-  $("prankSurprise").classList.add("show");
-  const prank=$("prankAudio"),video=$("prankVideo");
-  try{prank.pause();prank.currentTime=0;prank.volume=.72;const a=prank.play();if(a&&a.catch)a.catch(()=>status("Surprise audio could not start. Check your browser sound settings."));}catch(e){}
-  try{video.pause();video.currentTime=0;video.volume=.9;const v=video.play();if(v&&v.catch)v.catch(()=>status("Video file is not uploaded yet. Add assets/diwali/jethalal-surprise.mp4 to the repository."));}catch(e){}
  }
  $("ornamentBtn").addEventListener("click",popOrnament);
- function closePrank(){
-  $("prankSurprise").classList.remove("show");
-  $("prankVideo").pause();$("prankAudio").pause();
-  setTimeout(()=>$("finalWish").classList.add("show"),250);
- }
- $("closePrank").addEventListener("click",closePrank);
- $("prankVideo").addEventListener("ended",()=>{setTimeout(closePrank,450)});
  function shareLink(){const u=new URL(location.href);u.searchParams.set("name",data.name);u.searchParams.set("wish",data.wish);return u.toString()}
  async function copy(text){if(navigator.clipboard&&isSecureContext){await navigator.clipboard.writeText(text);return true}return false}
  $("copyBtn").addEventListener("click",async()=>{if(location.protocol==="file:"){status("Host this HTML on GitHub Pages or Netlify first to create a public link.");return}const u=shareLink();if(await copy(u))status("Personalized link copied. It includes the name and wish; export the HTML to include the photo.");else status("Copy this link: "+u)});
  $("shareBtn").addEventListener("click",async()=>{if(location.protocol==="file:"){status("To share a link, host this HTML on GitHub Pages or Netlify first.");return}const url=shareLink(),payload={title:"Shubho Dipaboli — "+data.name,text:data.wish,url};try{if(navigator.share)await navigator.share(payload);else if(await copy(url))status("Share link copied!");else status("Copy this link: "+url)}catch(e){if(e.name!=="AbortError")status("Sharing is unavailable here. Use Copy share link.")}});
  $("downloadBtn").addEventListener("click",()=>{let html="<!doctype html>\n"+document.documentElement.outerHTML;const a=html.indexOf("<!-- PERSONALIZATION_CONFIG_START -->"),b=html.indexOf("<!-- PERSONALIZATION_CONFIG_END -->");if(a<0||b<0){status("Could not prepare the personalized page.");return}const end=b+"<!-- PERSONALIZATION_CONFIG_END -->".length;const json=JSON.stringify(data).replace(/</g,"\\u003c");const block='<!-- PERSONALIZATION_CONFIG_START -->\n<script>window.PERSONALIZATION='+json+';</scr'+'ipt>\n<!-- PERSONALIZATION_CONFIG_END -->';html=html.slice(0,a)+block+html.slice(end);const blob=new Blob([html],{type:"text/html;charset=utf-8"}),url=URL.createObjectURL(blob),link=document.createElement("a"),slug=(data.name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,30)||"diwali");link.href=url;link.download="shubho-dipaboli-"+slug+".html";document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);status("Personalized HTML downloaded with your photo embedded.")});
-  $("replayBtn").addEventListener("click",()=>{const video=$("prankVideo"),revealVideo=$("revealVideo");video.pause();video.currentTime=0;revealVideo.pause();revealVideo.currentTime=0;revealVideo.controls=false;$("revealVideoFallback").classList.add("hidden");opened=false;popped=false;clearTimeout(brandTimer);$("finalWish").classList.remove("show");$("prankSurprise").classList.remove("show");$("prankAudio").pause();$("prankAudio").currentTime=0;$("prankVideo").pause();$("prankVideo").currentTime=0;$("ornamentBtn").classList.remove("popped");$("photoShow").classList.remove("active");$("welcome").classList.remove("active");$("opening").classList.remove("leave","curtain-open");$("openingUI").classList.remove("dismiss");$("brand").classList.remove("show");particles=[];ctx.clearRect(0,0,innerWidth,innerHeight);status("")});
+  $("replayBtn").addEventListener("click",()=>{const revealVideo=$("revealVideo"),sound=$("faahSound");revealVideo.pause();revealVideo.currentTime=0;revealVideo.controls=false;$("revealVideoFallback").classList.add("hidden");sound.pause();sound.currentTime=0;sound.onended=null;opened=false;popped=false;logoTransitionStarted=false;clearTimeout(logoFallbackTimer);$("finalWish").classList.remove("show");$("ornamentBtn").classList.remove("popped");$("photoShow").classList.remove("active");$("welcome").classList.remove("active");$("opening").classList.remove("leave","curtain-open");$("openingUI").classList.remove("dismiss");$("brand").classList.remove("show");particles=[];ctx.clearRect(0,0,innerWidth,innerHeight);status("")});
 })();
 </script>
 </body>
