@@ -1,0 +1,55 @@
+name: Validate and trim Diwali surprise MP4
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/trim-diwali-video.yml"
+      - "assets/diwali/jethalal-surprise.mp4"
+permissions:
+  contents: write
+concurrency:
+  group: trim-diwali-video
+  cancel-in-progress: false
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Validate MP4 container and remove trailing bytes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path("assets/diwali/jethalal-surprise.mp4")
+          data = p.read_bytes()
+          offset = 0
+          while offset + 8 <= len(data):
+              size = int.from_bytes(data[offset:offset+4], "big")
+              header = 8
+              if size == 1:
+                  if offset + 16 > len(data): break
+                  size = int.from_bytes(data[offset+8:offset+16], "big")
+                  header = 16
+              elif size == 0:
+                  size = len(data) - offset
+              if size < header or offset + size > len(data):
+                  break
+              offset += size
+          if offset == 0:
+              raise SystemExit("No valid MP4 atoms found")
+          if offset < len(data):
+              p.write_bytes(data[:offset])
+              print(f"Trimmed invalid trailing bytes: {len(data)} -> {offset}")
+          else:
+              print(f"MP4 container is clean: {len(data)} bytes")
+          PY
+      - name: Commit validated media
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/diwali/jethalal-surprise.mp4
+          git diff --cached --quiet && exit 0
+          git commit -m "Validate and trim Diwali surprise video"
+          git push
