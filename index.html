@@ -90,7 +90,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 .brand-lockup small{display:block;margin-top:12px;color:#a99480;font-size:.55rem;letter-spacing:.34em}
 @keyframes logoIn{from{opacity:0;transform:translateY(12px) scale(.95)}to{opacity:1;transform:none}}
 /* Orange dusk welcome */
-#welcome{display:none;position:fixed;inset:0;z-index:40;min-height:100svh;min-height:100dvh;align-items:center;padding:108px 18px 150px;background:radial-gradient(ellipse at 8% 75%,#a12a27 0%,#571622 29%,transparent 58%),linear-gradient(180deg,#05060b 0%,#090810 54%,#210b14 100%)}#welcome.active{display:grid;animation:welcomeEnter .9s ease both}@keyframes welcomeEnter{from{opacity:0;transform:scale(1.015)}to{opacity:1;transform:scale(1)}}
+#welcome{display:none;position:fixed;inset:0;z-index:40;min-height:100svh;min-height:100dvh;align-items:center;padding:108px 18px 150px;background:radial-gradient(ellipse at 40% 75%,#ff8b35 0%,#c54127 24%,#681923 50%,transparent 72%),linear-gradient(180deg,#030409 0%,#090810 42%,#210b14 100%)}#welcome.active{display:grid;animation:welcomeEnter .9s ease both}@keyframes welcomeEnter{from{opacity:0;transform:scale(1.015)}to{opacity:1;transform:scale(1)}}
 #welcome:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 75% 12%,#6d3b4820,transparent 35%),radial-gradient(ellipse at 15% 65%,#d13e3033,transparent 45%),linear-gradient(180deg,#030409 0%,transparent 45%,#120810 100%);pointer-events:none}
 .bunting{position:absolute;z-index:3;top:0;left:0;width:100%;height:160px;transform-origin:top center;animation:stringSway 7s ease-in-out infinite alternate}
 @keyframes stringSway{from{transform:rotate(-.7deg)}to{transform:rotate(.7deg)}}
@@ -99,11 +99,11 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 .welcome-heading .hindi{display:block;font-size:clamp(3.5rem,13vw,7.4rem);letter-spacing:.08em}
 .welcome-recipient{font:500 clamp(1.2rem,5vw,2rem) var(--serif);color:#fff0cf;margin:15px 0 8px}
 .welcome-line{font-size:.78rem;line-height:1.7;color:#ffe0bf;max-width:420px;margin:0 auto}
-.sun{display:none}
-.hanuman{display:none}
+.sun{display:block;position:absolute;z-index:1;left:36%;bottom:70px;transform:translateX(-50%);width:min(68vw,420px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 42% 38%,#ffe07b 0%,#ffad45 38%,#f36b2b 68%,#d53b28 100%);box-shadow:0 0 110px #ff762b88,0 0 220px #f04a2544}
+.hanuman{display:block;position:absolute;z-index:3;left:35%;bottom:22px;width:min(69vw,390px);height:auto;filter:drop-shadow(0 5px 8px #050207a8);transform-origin:50% 100%;animation:hanumanIdle 5.5s ease-in-out infinite}
 @keyframes hanumanIdle{0%,100%{transform:translateX(-50%) rotate(-.4deg)}50%{transform:translateX(-50%) translateY(-4px) rotate(.4deg)}}
 .skyline{position:absolute;z-index:2;left:0;bottom:0;width:100%;height:180px}
-.hanging-ornament{position:absolute;z-index:5;right:8%;top:34%;width:94px;height:170px;border:0;background:none;padding:0;filter:drop-shadow(0 7px 14px #16030b99);transform-origin:50% 0;animation:ornamentSwing 4s ease-in-out infinite alternate}
+.hanging-ornament{position:absolute;z-index:5;right:8%;top:34%;width:78px;height:166px;border:0;background:none;padding:0;filter:drop-shadow(0 7px 14px #16030b99);transform-origin:50% 0;animation:ornamentSwing 4s ease-in-out infinite alternate}
 @keyframes ornamentSwing{from{rotate:-3deg}to{rotate:3deg}}
 .hanging-ornament svg{width:100%;height:100%;overflow:visible}
 .hanging-ornament:focus-visible{outline:2px solid #ffe1a1;outline-offset:8px;border-radius:10px}
@@ -120,6 +120,16 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 .action.primary{border:0;background:linear-gradient(130deg,#ffe6a3,#d8943a);color:#4b1220}
 #status{font-size:.66rem;color:#e4c5a0;line-height:1.5;margin:10px 0 0;min-height:1em}
 #fireworkCanvas{position:fixed;inset:0;width:100%;height:100%;z-index:80;pointer-events:none}
+#prankSurprise{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:20px;background:#030208ed;backdrop-filter:blur(12px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .35s,visibility .35s}
+#prankSurprise.show{opacity:1;visibility:visible;pointer-events:auto}
+.prank-card{width:min(100%,420px);padding:34px 24px;text-align:center;border:1px solid #efc36e;background:radial-gradient(circle at 50% 0%,#71202b,#170b15 70%);box-shadow:0 20px 70px #000;border-radius:18px;animation:prankPop .55s cubic-bezier(.2,.9,.2,1) both}
+@keyframes prankPop{from{transform:scale(.65) rotate(-5deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
+.prank-burst{font-size:2rem;color:#ffd36d;letter-spacing:.5em;animation:prankTwinkle .7s ease-in-out infinite alternate}
+@keyframes prankTwinkle{to{transform:scale(1.13);filter:drop-shadow(0 0 15px #ffb13d)}}
+.prank-gada{display:block;width:120px;height:120px;margin:8px auto;filter:drop-shadow(0 5px 14px #f9a33a88);animation:gadaDrop .7s cubic-bezier(.2,.8,.2,1) both}
+@keyframes gadaDrop{from{transform:translateY(-100px) rotate(-35deg)}to{transform:translateY(0) rotate(0)}}
+.prank-card h2{font:900 clamp(2rem,9vw,3.2rem) var(--serif);color:#ffe2a0;margin:10px 0;text-shadow:0 4px 0 #8a2d20}
+.prank-card p{color:#f6d9bd;font-size:.9rem;margin:0 0 22px}
 @media(min-width:760px){.photo-reveal{width:300px}.editor{margin-top:28px}.showcase-card{width:min(42vw,470px)}#welcome{padding-bottom:130px}}
 @media(max-width:650px){#opening{padding:18px 14px}.opening-ui{padding-top:34px}.editor{margin-top:21px}.photo-reveal{width:min(74vw,340px)}#welcome{padding:90px 14px 125px}.skyline{height:145px}.hanging-ornament{right:4%;top:41%;width:92px;height:126px}.showcase-card{width:min(82vw,430px)}.showcase-caption{font-size:.9rem}#finalWish{padding:18px 16px}}
 @media(max-height:720px){.opening-ui{padding-top:8px}.editor{margin-top:10px}.photo-reveal{width:min(52vw,270px)}#welcome{padding-top:72px;padding-bottom:105px}.welcome-main{margin-top:0}.welcome-heading{margin:8px 0}.hanging-ornament{top:35%}}
@@ -153,12 +163,19 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 
 <section id="photoShow" aria-label="Your photo revealed with Diwali fireworks">
  <div class="showcase-sparkle" aria-hidden="true"></div>
- <div class="showcase-card"><video id="diwaliVideo" class="diwali-video" playsinline preload="metadata" controls aria-label="Diwali greeting video with original audio"><source src="assets/diwali/diwali-greeting.mp4" type="video/mp4">Your browser does not support HTML5 video.</video><div class="showcase-photo" id="photoFallback">
+ <div class="showcase-card"><div class="showcase-photo" id="photoFallback">
   <div class="showcase-fallback" id="showcaseFallback">S<small>A LITTLE SURPRISE FOR YOU</small></div>
   <img id="showcasePhoto" class="hidden" alt="Your personalized Diwali photo">
  </div><div class="showcase-caption" id="showcaseCaption">A little surprise for Someone Special</div></div>
 </section>
-<div id="brand" aria-hidden="true"><div class="brand-lockup"><span class="symbol">✺</span><strong>SHUBHO DIPABOLI</strong><small>A MOMENT MADE FOR YOU</small></div></div>
+<div id="brand" aria-hidden="true"><div class="brand-lockup"><span class="symbol">✺</span><strong>Faah.fun</strong><small>A LITTLE DIWALI SURPRISE</small></div></div>
+<audio id="prankAudio" preload="auto" src="assets/diwali/fahhhhh.mp3"></audio>
+<div id="prankSurprise" role="dialog" aria-modal="true" aria-labelledby="prankTitle">
+ <div class="prank-card"><div class="prank-burst">✦ ✧ ✦</div>
+  <svg class="prank-gada" viewBox="0 0 180 190" aria-hidden="true"><path d="M91 80L75 180Q90 190 105 180L92 80Z" fill="#b87536" stroke="#f2c36d" stroke-width="5"/><path d="M48 67Q37 24 91 8Q145 24 134 67Q125 95 91 100Q57 95 48 67Z" fill="#d99a43" stroke="#ffe0a0" stroke-width="6"/><path d="M59 48Q91 27 123 48M54 67Q91 89 128 67" fill="none" stroke="#8d4d28" stroke-width="5"/><circle cx="91" cy="52" r="8" fill="#ffe8aa"/></svg>
+  <div class="eyebrow">YOU FOUND THE SURPRISE</div><h2 id="prankTitle">SURPRISE!</h2><p>A little unexpected Diwali masti for you.</p><button class="action primary" id="closePrank">Continue ✨</button>
+ </div>
+</div>
 
 <section class="scene" id="welcome" aria-label="Swagatam welcome screen">
  <svg class="bunting" viewBox="0 0 1000 180" preserveAspectRatio="none" aria-hidden="true">
@@ -222,6 +239,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}
  function status(t){$("status").textContent=t}
  function render(){
   $("welcomeName").textContent=data.name;$("closingName").textContent=data.name;$("closingWish").textContent=data.wish;
+  $("teaser").textContent="Wait for the surprise, "+data.name+"! ✨";
   $("photoCaption").textContent="A little surprise for "+data.name;$("photoInitial").textContent=(data.name.trim()[0]||"✦").toUpperCase();
   $("showcaseCaption").textContent="A little surprise for "+data.name;
   $("showcaseFallback").firstChild.textContent=(data.name.trim()[0]||"✦").toUpperCase();
@@ -256,11 +274,8 @@ button,input,textarea{font:inherit}button{cursor:pointer}
   }catch(e){}
  }
  function startPhotoShow(){
-  const points=[[.22,.28],[.78,.32],[.5,.72],[.18,.68],[.82,.66],[.5,.18]];
-  points.forEach((p,k)=>setTimeout(()=>burst(innerWidth*p[0],innerHeight*p[1],k===2?125:88),450+k*1050));
-  const video=$("diwaliVideo");
-  video.currentTime=0;
-  video.play().catch(()=>{status("Tap the video play button to hear the original audio.");});
+  const points=[[.18,.25],[.82,.28],[.5,.72],[.16,.7],[.84,.68],[.5,.16]];
+  points.forEach((p,k)=>setTimeout(()=>burst(innerWidth*p[0],innerHeight*p[1],k===2?125:88),350+k*900));
  }
  function finishPhotoShow(){
   $("brand").classList.add("show");
@@ -270,19 +285,25 @@ button,input,textarea{font:inherit}button{cursor:pointer}
   if(opened)return;opened=true;fireworkSound();
   $("opening").classList.add("curtain-open");$("openingUI").classList.add("dismiss");
   setTimeout(()=>{$("opening").classList.add("leave");$("photoShow").classList.add("active");startPhotoShow()},1550);
-  const video=$("diwaliVideo");
-  video.onended=finishPhotoShow;
-  brandTimer=setTimeout(()=>{if(!video.ended)finishPhotoShow()},15000);
+  brandTimer=setTimeout(finishPhotoShow,8500);
  }
  $("openBtn").addEventListener("click",openReveal);
- function popOrnament(){if(popped)return;popped=true;const r=$("ornamentBtn").getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;burst(x,y,140);fireworkSound();setTimeout(()=>{burst(x-65,y-25,55);fireworkSound()},130);setTimeout(()=>{burst(x+65,y+25,55);fireworkSound()},260);$("ornamentBtn").classList.add("popped");setTimeout(()=>$("finalWish").classList.add("show"),520)}
+ function popOrnament(){
+  if(popped)return;popped=true;
+  const r=$("ornamentBtn").getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;
+  burst(x,y,160);fireworkSound();setTimeout(()=>burst(x-65,y-25,65),130);setTimeout(()=>burst(x+65,y+25,65),260);
+  $("ornamentBtn").classList.add("popped");
+  const prank=$("prankAudio");try{prank.currentTime=0;const play=prank.play();if(play&&play.catch)play.catch(()=>status("Tap once more to play the surprise sound."));}catch(e){}
+  setTimeout(()=>$("prankSurprise").classList.add("show"),420);
+ }
  $("ornamentBtn").addEventListener("click",popOrnament);
+ $("closePrank").addEventListener("click",()=>{$("prankSurprise").classList.remove("show");setTimeout(()=>$("finalWish").classList.add("show"),250)});
  function shareLink(){const u=new URL(location.href);u.searchParams.set("name",data.name);u.searchParams.set("wish",data.wish);return u.toString()}
  async function copy(text){if(navigator.clipboard&&isSecureContext){await navigator.clipboard.writeText(text);return true}return false}
  $("copyBtn").addEventListener("click",async()=>{if(location.protocol==="file:"){status("Host this HTML on GitHub Pages or Netlify first to create a public link.");return}const u=shareLink();if(await copy(u))status("Personalized link copied. It includes the name and wish; export the HTML to include the photo.");else status("Copy this link: "+u)});
  $("shareBtn").addEventListener("click",async()=>{if(location.protocol==="file:"){status("To share a link, host this HTML on GitHub Pages or Netlify first.");return}const url=shareLink(),payload={title:"Shubho Dipaboli — "+data.name,text:data.wish,url};try{if(navigator.share)await navigator.share(payload);else if(await copy(url))status("Share link copied!");else status("Copy this link: "+url)}catch(e){if(e.name!=="AbortError")status("Sharing is unavailable here. Use Copy share link.")}});
  $("downloadBtn").addEventListener("click",()=>{let html="<!doctype html>\n"+document.documentElement.outerHTML;const a=html.indexOf("<!-- PERSONALIZATION_CONFIG_START -->"),b=html.indexOf("<!-- PERSONALIZATION_CONFIG_END -->");if(a<0||b<0){status("Could not prepare the personalized page.");return}const end=b+"<!-- PERSONALIZATION_CONFIG_END -->".length;const json=JSON.stringify(data).replace(/</g,"\\u003c");const block='<!-- PERSONALIZATION_CONFIG_START -->\n<script>window.PERSONALIZATION='+json+';</scr'+'ipt>\n<!-- PERSONALIZATION_CONFIG_END -->';html=html.slice(0,a)+block+html.slice(end);const blob=new Blob([html],{type:"text/html;charset=utf-8"}),url=URL.createObjectURL(blob),link=document.createElement("a"),slug=(data.name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,30)||"diwali");link.href=url;link.download="shubho-dipaboli-"+slug+".html";document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);status("Personalized HTML downloaded with your photo embedded.")});
- $("replayBtn").addEventListener("click",()=>{const video=$("diwaliVideo");video.pause();video.currentTime=0;video.onended=null;opened=false;popped=false;clearTimeout(brandTimer);$("finalWish").classList.remove("show");$("ornamentBtn").classList.remove("popped");$("photoShow").classList.remove("active");$("welcome").classList.remove("active");$("opening").classList.remove("leave","curtain-open");$("openingUI").classList.remove("dismiss");$("brand").classList.remove("show");particles=[];ctx.clearRect(0,0,innerWidth,innerHeight);status("")});
+ $("replayBtn").addEventListener("click",()=>{const video=$("diwaliVideo");video.pause();video.currentTime=0;video.onended=null;opened=false;popped=false;clearTimeout(brandTimer);$("finalWish").classList.remove("show");$("prankSurprise").classList.remove("show");$("prankAudio").pause();$("prankAudio").currentTime=0;$("ornamentBtn").classList.remove("popped");$("photoShow").classList.remove("active");$("welcome").classList.remove("active");$("opening").classList.remove("leave","curtain-open");$("openingUI").classList.remove("dismiss");$("brand").classList.remove("show");particles=[];ctx.clearRect(0,0,innerWidth,innerHeight);status("")});
 })();
 </script>
 </body>
