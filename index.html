@@ -75,6 +75,10 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 #photoShow.active .showcase-card{animation:showcaseIn .9s .2s cubic-bezier(.2,.8,.2,1) forwards}
 .showcase-photo{width:100%;height:100%;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 40%,#5d2735,#170c17 75%);color:#ffe4a2;text-align:center}.diwali-video{display:block;width:100%;height:100%;object-fit:contain;background:#050308;border-radius:2px}
 .showcase-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.reveal-video-fallback{position:absolute;inset:0;display:grid;place-items:center;padding:22px;text-align:center;color:#ffe4a2;font-weight:800;background:radial-gradient(circle,#632231,#160b15)}
+.reveal-video-fallback.hidden{display:none!important}
+#revealVideo{opacity:0;transition:opacity .35s ease}
+#photoShow.active #revealVideo{opacity:1}
 .showcase-fallback{padding:20px;font:500 clamp(3rem,12vw,5.5rem) var(--serif);text-shadow:0 4px 22px #e89b43aa}
 .showcase-fallback small{display:block;margin-top:12px;font:800 .58rem var(--sans);letter-spacing:.22em}
 .showcase-caption{position:absolute;z-index:3;top:calc(100% + 16px);left:0;width:100%;text-align:center;color:#f4d69b;font:italic 1rem var(--serif);text-shadow:0 2px 14px #000}
@@ -162,13 +166,15 @@ button,input,textarea{font:inherit}button{cursor:pointer}
  <div class="curtain-layer" id="curtainLayer" aria-hidden="true"><div class="curtain-panel left"></div><div class="curtain-panel right"></div><div class="curtain-valance"></div></div>
 </section>
 
-<section id="photoShow" aria-label="Your photo revealed with Diwali fireworks">
- <div class="showcase-sparkle" aria-hidden="true"></div>
- <div class="showcase-card"><div class="showcase-photo" id="photoFallback">
-  <div class="showcase-fallback" id="showcaseFallback">S<small>A LITTLE SURPRISE FOR YOU</small></div>
-  <img id="showcasePhoto" class="hidden" alt="Your personalized Diwali photo">
- </div><div class="showcase-caption" id="showcaseCaption">A little surprise for Someone Special</div></div>
-</section>
+<section id="photoShow" aria-label="Diwali surprise video playing inside the golden frame">
+  <div class="showcase-sparkle" aria-hidden="true"></div>
+  <div class="showcase-card"><div class="showcase-photo" id="photoFallback">
+   <video id="revealVideo" class="diwali-video" playsinline preload="auto" aria-label="Diwali surprise video">
+    <source src="assets/diwali/jethalal-surprise.mp4" type="video/mp4">
+   </video>
+   <div class="reveal-video-fallback hidden" id="revealVideoFallback">Tap to play your Diwali surprise</div>
+  </div><div class="showcase-caption" id="showcaseCaption">A little surprise for Someone Special</div></div>
+ </section>
 <div id="brand" aria-hidden="true"><div class="brand-lockup"><span class="symbol">✺</span><strong>Faah.fun</strong><small>A LITTLE DIWALI SURPRISE</small></div></div>
 <audio id="prankAudio" preload="auto" src="assets/diwali/fahhhhh.mp3"></audio>
 <div id="prankSurprise" role="dialog" aria-modal="true" aria-labelledby="prankTitle">
@@ -284,14 +290,21 @@ button,input,textarea{font:inherit}button{cursor:pointer}
   points.forEach((p,k)=>setTimeout(()=>burst(innerWidth*p[0],innerHeight*p[1],k===2?125:88),350+k*900));
  }
  function finishPhotoShow(){
+  const video=$("revealVideo");
+  if(video&&!video.ended)video.pause();
   $("brand").classList.add("show");
   setTimeout(()=>{$("photoShow").classList.remove("active");$("welcome").classList.add("active");$("brand").classList.remove("show")},950);
  }
+ $("revealVideo").addEventListener("ended",finishPhotoShow);
+ $("revealVideo").addEventListener("error",()=>{$("revealVideoFallback").classList.remove("hidden");status("The reveal video could not load. Please check the video asset path.")});
  function openReveal(){
-  if(opened)return;opened=true;fireworkSound();
+  if(opened)return;opened=true;
+  const revealVideo=$("revealVideo");
+  revealVideo.pause();revealVideo.currentTime=0;revealVideo.muted=false;revealVideo.volume=1;
+  const playPromise=revealVideo.play();
+  if(playPromise&&playPromise.catch)playPromise.catch(()=>{$("revealVideoFallback").classList.remove("hidden");revealVideo.controls=true;status("Tap the video inside the frame to start playback with sound.")});
   $("opening").classList.add("curtain-open");$("openingUI").classList.add("dismiss");
   setTimeout(()=>{$("opening").classList.add("leave");$("photoShow").classList.add("active");startPhotoShow()},1550);
-  brandTimer=setTimeout(finishPhotoShow,8500);
  }
  $("openBtn").addEventListener("click",openReveal);
  function popOrnament(){
@@ -317,7 +330,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}
  $("copyBtn").addEventListener("click",async()=>{if(location.protocol==="file:"){status("Host this HTML on GitHub Pages or Netlify first to create a public link.");return}const u=shareLink();if(await copy(u))status("Personalized link copied. It includes the name and wish; export the HTML to include the photo.");else status("Copy this link: "+u)});
  $("shareBtn").addEventListener("click",async()=>{if(location.protocol==="file:"){status("To share a link, host this HTML on GitHub Pages or Netlify first.");return}const url=shareLink(),payload={title:"Shubho Dipaboli — "+data.name,text:data.wish,url};try{if(navigator.share)await navigator.share(payload);else if(await copy(url))status("Share link copied!");else status("Copy this link: "+url)}catch(e){if(e.name!=="AbortError")status("Sharing is unavailable here. Use Copy share link.")}});
  $("downloadBtn").addEventListener("click",()=>{let html="<!doctype html>\n"+document.documentElement.outerHTML;const a=html.indexOf("<!-- PERSONALIZATION_CONFIG_START -->"),b=html.indexOf("<!-- PERSONALIZATION_CONFIG_END -->");if(a<0||b<0){status("Could not prepare the personalized page.");return}const end=b+"<!-- PERSONALIZATION_CONFIG_END -->".length;const json=JSON.stringify(data).replace(/</g,"\\u003c");const block='<!-- PERSONALIZATION_CONFIG_START -->\n<script>window.PERSONALIZATION='+json+';</scr'+'ipt>\n<!-- PERSONALIZATION_CONFIG_END -->';html=html.slice(0,a)+block+html.slice(end);const blob=new Blob([html],{type:"text/html;charset=utf-8"}),url=URL.createObjectURL(blob),link=document.createElement("a"),slug=(data.name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,30)||"diwali");link.href=url;link.download="shubho-dipaboli-"+slug+".html";document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);status("Personalized HTML downloaded with your photo embedded.")});
- $("replayBtn").addEventListener("click",()=>{const video=$("prankVideo");video.pause();video.currentTime=0;opened=false;popped=false;clearTimeout(brandTimer);$("finalWish").classList.remove("show");$("prankSurprise").classList.remove("show");$("prankAudio").pause();$("prankAudio").currentTime=0;$("prankVideo").pause();$("prankVideo").currentTime=0;$("ornamentBtn").classList.remove("popped");$("photoShow").classList.remove("active");$("welcome").classList.remove("active");$("opening").classList.remove("leave","curtain-open");$("openingUI").classList.remove("dismiss");$("brand").classList.remove("show");particles=[];ctx.clearRect(0,0,innerWidth,innerHeight);status("")});
+  $("replayBtn").addEventListener("click",()=>{const video=$("prankVideo"),revealVideo=$("revealVideo");video.pause();video.currentTime=0;revealVideo.pause();revealVideo.currentTime=0;revealVideo.controls=false;$("revealVideoFallback").classList.add("hidden");opened=false;popped=false;clearTimeout(brandTimer);$("finalWish").classList.remove("show");$("prankSurprise").classList.remove("show");$("prankAudio").pause();$("prankAudio").currentTime=0;$("prankVideo").pause();$("prankVideo").currentTime=0;$("ornamentBtn").classList.remove("popped");$("photoShow").classList.remove("active");$("welcome").classList.remove("active");$("opening").classList.remove("leave","curtain-open");$("openingUI").classList.remove("dismiss");$("brand").classList.remove("show");particles=[];ctx.clearRect(0,0,innerWidth,innerHeight);status("")});
 })();
 </script>
 </body>
