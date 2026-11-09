@@ -1,32 +1,15 @@
-# Diwali visual assets
+# Diwali website media
 
-This directory is the target location for the separated assets from the user-provided
-"Diwali Celebration Asset Sheet-3.png" reference.
+## Committed media
+- `fahhhhh.mp3` — short surprise sound, played when the hanging firecracker is tapped.
+- `jethalal-surprise.mp4` — optimized 4:3 surprise clip, played in the prank overlay after the firecracker interaction.
 
-Expected files:
-- velvet-curtain.png
-- ornate-gold-photo-frame.png
-- firework-gold.png
-- fireworks-colorful.png
-- sunset.png
-- hanuman-silhouette.png
-- gada.png
-- green-hanging-firecracker.png
-- city-skyline.png
-- marigold-toran.png
-- festive-string-lights.png
-- golden-particles.png
-- golden-sparkles.png
-- golden-leaf-branch.png
+## Website behavior
+- Click **OPEN** to reveal the portrait/fireworks scene.
+- The Faah.fun brand transition leads into the Swagatam welcome scene.
+- Tap the hanging green firecracker to play the surprise video and supplied MP3 sound.
+- When the clip ends, the personalized final wish appears.
+- Replay resets the scene, video and sound.
 
-The source sheet contains a visible checkerboard pattern in its RGB pixels. Do not
-assume the checkerboard is transparency. Before committing the raster files, remove
-the checkerboard carefully and verify the alpha channel, especially inside the
-ornate photo frame and around fine fireworks/leaf details.
-
-Integration should reference these files from index.html using relative paths under
-assets/diwali/. Keep the assets as separate elements so their positions and animation
-remain responsive and independently controllable.
-
-Note: this README is an integration manifest; the binary PNG files have not yet been
-uploaded in this commit.
+## Visual styling
+The current page uses CSS gradients/curtain folds and inline SVG artwork for the Hanuman silhouette, skyline, bunting and hanging firecracker. The user-provided Diwali asset-sheet PNGs remain available as source material but are not currently separate committed files in this repository.
