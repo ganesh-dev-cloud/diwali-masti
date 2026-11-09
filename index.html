@@ -73,7 +73,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 #photoShow:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 55%,#a12c3820,transparent 52%);pointer-events:none}
 .showcase-card{position:relative;z-index:2;width:min(72vw,440px);aspect-ratio:4/3;padding:8px;border:1px solid #e5bd6c;border-radius:8px;background:linear-gradient(135deg,#ffe7a0,#8c5429 23%,#f9d37e 48%,#6d3c22 76%,#ffe6a2);box-shadow:0 0 0 2px #754321,0 20px 70px #000,0 0 50px #e89a4b44;opacity:0;transform:scale(.78) translateY(15px);animation:none}
 #photoShow.active .showcase-card{animation:showcaseIn .9s .2s cubic-bezier(.2,.8,.2,1) forwards}
-.showcase-photo{width:100%;height:100%;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 40%,#5d2735,#170c17 75%);color:#ffe4a2;text-align:center}
+.showcase-photo{width:100%;height:100%;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 40%,#5d2735,#170c17 75%);color:#ffe4a2;text-align:center}.diwali-video{display:block;width:100%;height:100%;object-fit:contain;background:#050308;border-radius:2px}
 .showcase-photo img{width:100%;height:100%;object-fit:cover;display:block}
 .showcase-fallback{padding:20px;font:500 clamp(3rem,12vw,5.5rem) var(--serif);text-shadow:0 4px 22px #e89b43aa}
 .showcase-fallback small{display:block;margin-top:12px;font:800 .58rem var(--sans);letter-spacing:.22em}
@@ -153,7 +153,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 
 <section id="photoShow" aria-label="Your photo revealed with Diwali fireworks">
  <div class="showcase-sparkle" aria-hidden="true"></div>
- <div class="showcase-card"><div class="showcase-photo">
+ <div class="showcase-card"><video id="diwaliVideo" class="diwali-video" playsinline preload="metadata" controls aria-label="Diwali greeting video with original audio"><source src="assets/diwali/diwali-greeting.mp4" type="video/mp4">Your browser does not support HTML5 video.</video><div class="showcase-photo" id="photoFallback">
   <div class="showcase-fallback" id="showcaseFallback">S<small>A LITTLE SURPRISE FOR YOU</small></div>
   <img id="showcasePhoto" class="hidden" alt="Your personalized Diwali photo">
  </div><div class="showcase-caption" id="showcaseCaption">A little surprise for Someone Special</div></div>
@@ -257,16 +257,22 @@ button,input,textarea{font:inherit}button{cursor:pointer}
  }
  function startPhotoShow(){
   const points=[[.22,.28],[.78,.32],[.5,.72],[.18,.68],[.82,.66],[.5,.18]];
-  points.forEach((p,k)=>setTimeout(()=>{burst(innerWidth*p[0],innerHeight*p[1],k===2?125:88);fireworkSound()},450+k*1050));
+  points.forEach((p,k)=>setTimeout(()=>burst(innerWidth*p[0],innerHeight*p[1],k===2?125:88),450+k*1050));
+  const video=$("diwaliVideo");
+  video.currentTime=0;
+  video.play().catch(()=>{status("Tap the video play button to hear the original audio.");});
+ }
+ function finishPhotoShow(){
+  $("brand").classList.add("show");
+  setTimeout(()=>{$("photoShow").classList.remove("active");$("welcome").classList.add("active");$("brand").classList.remove("show")},950);
  }
  function openReveal(){
   if(opened)return;opened=true;fireworkSound();
   $("opening").classList.add("curtain-open");$("openingUI").classList.add("dismiss");
   setTimeout(()=>{$("opening").classList.add("leave");$("photoShow").classList.add("active");startPhotoShow()},1550);
-  brandTimer=setTimeout(()=>{
-   $("brand").classList.add("show");
-   setTimeout(()=>{$("photoShow").classList.remove("active");$("welcome").classList.add("active");$("brand").classList.remove("show")},950);
-  },7900);
+  const video=$("diwaliVideo");
+  video.onended=finishPhotoShow;
+  brandTimer=setTimeout(()=>{if(!video.ended)finishPhotoShow()},15000);
  }
  $("openBtn").addEventListener("click",openReveal);
  function popOrnament(){if(popped)return;popped=true;const r=$("ornamentBtn").getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;burst(x,y,140);fireworkSound();setTimeout(()=>{burst(x-65,y-25,55);fireworkSound()},130);setTimeout(()=>{burst(x+65,y+25,55);fireworkSound()},260);$("ornamentBtn").classList.add("popped");setTimeout(()=>$("finalWish").classList.add("show"),520)}
@@ -276,7 +282,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}
  $("copyBtn").addEventListener("click",async()=>{if(location.protocol==="file:"){status("Host this HTML on GitHub Pages or Netlify first to create a public link.");return}const u=shareLink();if(await copy(u))status("Personalized link copied. It includes the name and wish; export the HTML to include the photo.");else status("Copy this link: "+u)});
  $("shareBtn").addEventListener("click",async()=>{if(location.protocol==="file:"){status("To share a link, host this HTML on GitHub Pages or Netlify first.");return}const url=shareLink(),payload={title:"Shubho Dipaboli — "+data.name,text:data.wish,url};try{if(navigator.share)await navigator.share(payload);else if(await copy(url))status("Share link copied!");else status("Copy this link: "+url)}catch(e){if(e.name!=="AbortError")status("Sharing is unavailable here. Use Copy share link.")}});
  $("downloadBtn").addEventListener("click",()=>{let html="<!doctype html>\n"+document.documentElement.outerHTML;const a=html.indexOf("<!-- PERSONALIZATION_CONFIG_START -->"),b=html.indexOf("<!-- PERSONALIZATION_CONFIG_END -->");if(a<0||b<0){status("Could not prepare the personalized page.");return}const end=b+"<!-- PERSONALIZATION_CONFIG_END -->".length;const json=JSON.stringify(data).replace(/</g,"\\u003c");const block='<!-- PERSONALIZATION_CONFIG_START -->\n<script>window.PERSONALIZATION='+json+';</scr'+'ipt>\n<!-- PERSONALIZATION_CONFIG_END -->';html=html.slice(0,a)+block+html.slice(end);const blob=new Blob([html],{type:"text/html;charset=utf-8"}),url=URL.createObjectURL(blob),link=document.createElement("a"),slug=(data.name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,30)||"diwali");link.href=url;link.download="shubho-dipaboli-"+slug+".html";document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);status("Personalized HTML downloaded with your photo embedded.")});
- $("replayBtn").addEventListener("click",()=>{opened=false;popped=false;clearTimeout(brandTimer);$("finalWish").classList.remove("show");$("ornamentBtn").classList.remove("popped");$("photoShow").classList.remove("active");$("welcome").classList.remove("active");$("opening").classList.remove("leave","curtain-open");$("openingUI").classList.remove("dismiss");$("brand").classList.remove("show");particles=[];ctx.clearRect(0,0,innerWidth,innerHeight);status("")});
+ $("replayBtn").addEventListener("click",()=>{const video=$("diwaliVideo");video.pause();video.currentTime=0;video.onended=null;opened=false;popped=false;clearTimeout(brandTimer);$("finalWish").classList.remove("show");$("ornamentBtn").classList.remove("popped");$("photoShow").classList.remove("active");$("welcome").classList.remove("active");$("opening").classList.remove("leave","curtain-open");$("openingUI").classList.remove("dismiss");$("brand").classList.remove("show");particles=[];ctx.clearRect(0,0,innerWidth,innerHeight);status("")});
 })();
 </script>
 </body>
