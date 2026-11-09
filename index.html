@@ -1,76 +1,213 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#10172d">
-<meta name="description" content="A premium, funny and interactive Diwali celebration — with love, Ganesh.">
-<meta property="og:title" content="Diwali Masti — A little sparkle, a lot of laughter">
-<meta property="og:description" content="A festive surprise from Ganesh. Open for fireworks, memes and warm wishes.">
-<meta property="og:type" content="website">
-<title>Diwali Masti — With love, Ganesh</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#270710">
+<meta name="description" content="A personalized Diwali reveal greeting — Shubho Dipaboli!">
+<title>Shubho Dipaboli · A little surprise</title>
 <style>
-:root{--night:#10172d;--night2:#1b2544;--ivory:#fff8e9;--paper:#f8edda;--gold:#e8b85e;--gold2:#ffdc91;--pink:#d84e79;--ink:#302236}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--night);color:var(--ivory);font-family:"DM Sans",Arial,sans-serif;overflow-x:hidden}button{font:inherit;cursor:pointer}a{color:inherit}img,video{display:block;max-width:100%}
-.nav{position:absolute;z-index:10;top:0;left:0;width:100%;height:76px;padding:0 clamp(20px,6vw,88px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff20;background:linear-gradient(#0b1124aa,transparent)}
-.brand{font-size:.77rem;font-weight:800;letter-spacing:.2em;color:var(--gold2);display:flex;align-items:center;gap:10px}.brand-mark{width:29px;height:29px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center}
-.nav-actions{display:flex;gap:10px}.nav-link,.sound{border:1px solid #ffffff45;background:#ffffff0d;color:var(--ivory);border-radius:99px;padding:10px 15px;font-size:.77rem;font-weight:700;text-decoration:none}
-.hero{min-height:790px;min-height:100svh;position:relative;display:flex;align-items:center;overflow:hidden;isolation:isolate;padding:130px clamp(22px,8vw,120px) 90px;background:radial-gradient(ellipse at 76% 45%,#512747 0%,#232343 38%,#10172d 76%)}
-.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3;opacity:.34;filter:saturate(.85)}
-.hero:before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,#10172df2 0%,#10172dd4 45%,#10172d55 100%),linear-gradient(0deg,#10172d 0%,transparent 35%,#10172d55 100%)}
-.hero:after{content:"";position:absolute;inset:18px;border:1px solid #e8b85e55;pointer-events:none}
-.hero-copy{max-width:750px;position:relative;z-index:2}.eyebrow{font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;font-weight:800;color:var(--gold2);display:flex;align-items:center;gap:12px}.eyebrow:before{content:"";height:1px;width:32px;background:var(--gold)}
-h1,h2,h3,p{margin-top:0}h1{font:500 clamp(4.2rem,10vw,9.4rem)/.92 "Playfair Display",Georgia,serif;letter-spacing:-.055em;margin:25px 0 22px}h1 em{color:var(--gold2);font-weight:500}
-.lead{max-width:540px;color:#f0e3d5;font-size:clamp(1rem,1.6vw,1.15rem);line-height:1.8;margin-bottom:22px}
-.sticker{display:inline-flex;background:var(--ivory);color:#96384b;padding:12px 16px;border-radius:5px;box-shadow:5px 6px 0 #c26b59;transform:rotate(-1.6deg);font-weight:800;font-size:.82rem;margin:7px 0 28px}
-.btn-gold{border:0;border-radius:99px;padding:16px 24px;background:linear-gradient(120deg,#ffdf9b,#e9b251);color:#3b2431;font-weight:800;font-size:.9rem;box-shadow:0 10px 35px #e8b85e38;transition:transform .2s,box-shadow .2s}.btn-gold:hover{transform:translateY(-3px);box-shadow:0 15px 40px #e8b85e55}.micro{font-size:.76rem;color:#d3c2b8;margin:15px 0 0}
-.hero-photo{position:absolute;right:8%;top:22%;width:min(34vw,420px);aspect-ratio:4/5;border:1px solid #e8b85e99;padding:9px;transform:rotate(3deg);box-shadow:0 30px 80px #0009;background:#ffffff12}
-.hero-photo img{width:100%;height:100%;object-fit:cover}.photo-label{position:absolute;bottom:18px;left:18px;background:var(--ivory);color:#542b3c;padding:10px 14px;font:italic 1.05rem "Playfair Display",serif;transform:rotate(-2deg)}
-.star{position:absolute;color:var(--gold2);font-size:20px;animation:float 5s ease-in-out infinite;pointer-events:none}.s1{top:20%;left:53%}.s2{top:72%;left:47%;animation-delay:1.4s}.s3{top:15%;right:8%;animation-delay:2s}@keyframes float{50%{transform:translateY(-18px) rotate(35deg);opacity:.55}}
-.ticker{overflow:hidden;background:var(--gold);color:#332237;padding:13px 0;white-space:nowrap;font-size:.7rem;letter-spacing:.18em;font-weight:800}.ticker-track{display:inline-block;animation:marquee 32s linear infinite}.ticker span{padding:0 30px}@keyframes marquee{to{transform:translateX(-50%)}}
-.section{padding:100px clamp(20px,7vw,100px);position:relative}.light{background:var(--paper);color:var(--ink)}.dark{background:linear-gradient(145deg,#1a2444,#10172d);color:var(--ivory)}
-.section-head{max-width:700px;margin:0 auto 45px;text-align:center}.section-head .eyebrow{justify-content:center}.section-head .eyebrow:before{display:none}.section h2{font:500 clamp(2.7rem,6vw,5.2rem)/1.04 "Playfair Display",Georgia,serif;letter-spacing:-.035em;margin:17px 0}.section-head p{font-size:.96rem;line-height:1.8;opacity:.78;max-width:580px;margin:0 auto}
-.story-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;max-width:1120px;margin:auto}.story-image{min-height:430px;position:relative;overflow:hidden;background:#30243b}.story-image img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}.story-image:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#171629bb,transparent 65%)}.story-caption{position:absolute;z-index:1;bottom:26px;left:28px;color:white}.story-caption small{letter-spacing:.18em;text-transform:uppercase;font-size:.66rem;color:var(--gold2);font-weight:800}.story-caption h3{font:500 clamp(2rem,4vw,3.4rem)/1.05 "Playfair Display",serif;margin:9px 0 0}
-.news{background:#fffaf1;border:1px solid #e5c994;padding:clamp(25px,4vw,48px);display:flex;flex-direction:column;justify-content:center;position:relative}.news:before{content:"";position:absolute;inset:10px;border:1px solid #d8b979;pointer-events:none}.news>*{position:relative}.news small{color:#a34852;font-weight:800;letter-spacing:.18em;font-size:.66rem;text-transform:uppercase}.news h3{font:500 clamp(2rem,4vw,3.3rem)/1.08 "Playfair Display",serif;color:#38263a;margin:18px 0}.news p{font-size:.92rem;line-height:1.8;color:#66545b}.quote{font:italic 1.08rem/1.6 "Playfair Display",serif;color:#a13f57;border-left:2px solid var(--gold);padding-left:15px;margin:12px 0}
-.memes{max-width:1120px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.meme{border:1px solid #e8b85e55;background:#ffffff08;overflow:hidden;transition:transform .25s,border-color .25s}.meme:hover{transform:translateY(-7px);border-color:var(--gold)}.meme-art{aspect-ratio:4/3;display:grid;place-items:center;position:relative;background:radial-gradient(circle at 50% 30%,#824b52,#2a2443 68%)}.meme-art:nth-child(1){background:linear-gradient(135deg,#59324b,#152c48)}.meme-emoji{font-size:clamp(4rem,8vw,6rem);filter:drop-shadow(0 12px 15px #0007);transition:transform .3s}.meme:hover .meme-emoji{transform:scale(1.13) rotate(-5deg)}.stamp{position:absolute;top:14px;right:14px;background:var(--gold2);color:#3a2632;font-size:.6rem;font-weight:900;letter-spacing:.1em;padding:7px 9px;transform:rotate(4deg)}.meme-copy{padding:22px}.meme-copy small{color:var(--gold2);font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:.63rem}.meme-copy h3{font:500 1.4rem "Playfair Display",serif;margin:9px 0}.meme-copy p{font-size:.84rem;line-height:1.65;color:#cfc3c0;margin:0}
-.reel{display:grid;grid-template-columns:.85fr 1.15fr;gap:42px;max-width:1120px;margin:auto;align-items:center}.reel-copy h2{font:500 clamp(2.7rem,5vw,4.7rem)/1.03 "Playfair Display",serif;margin:15px 0}.reel-copy p{font-size:.94rem;line-height:1.8;color:#d2c4c0}.video-frame{aspect-ratio:16/9;background:#080d1c;border:1px solid #e8b85e88;padding:7px;box-shadow:0 25px 60px #0006}.video-frame video{width:100%;height:100%;object-fit:cover;background:#080d1c}.video-caption{font-size:.7rem;color:#bdaeb0;margin-top:11px}
-.greeting{max-width:850px;margin:auto;text-align:center}.greeting-card{background:var(--ivory);color:#38243a;padding:clamp(28px,6vw,62px);border:7px double #d4a14e;outline:1px solid #d4a14e;outline-offset:8px;box-shadow:0 30px 80px #0004}.ornament{color:#b54865;letter-spacing:.3em;font-size:1rem}.greeting-card h3{font:500 clamp(2.5rem,6vw,4.8rem)/1.05 "Playfair Display",serif;color:#a33f59;margin:24px 0}.greeting-card p{font-size:1rem;line-height:1.9;max-width:630px;margin:0 auto;color:#57434b}.signature{font:italic 1.35rem "Playfair Display",serif;color:#a33f59;margin-top:25px}.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:36px}.btn-line{border:1px solid #e8b85e;color:var(--ivory);background:transparent;padding:14px 20px;border-radius:99px;font-size:.82rem;font-weight:800}.btn-line:hover{background:#ffffff14}
-footer{background:#0b1020;padding:32px 20px;text-align:center;color:#b9aeb0;font-size:.76rem;line-height:1.8}footer strong{color:var(--gold2)}.credits{margin-top:9px;font-size:.67rem;color:#8f858d}.credits a{color:#d7b66e}
-.spark{position:fixed;z-index:60;pointer-events:none;font-size:18px;animation:burst 1.3s ease-out forwards}@keyframes burst{0%{opacity:1;transform:translate(0,0) scale(.5)}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.5) rotate(160deg)}}.confetti{position:fixed;top:-20px;z-index:59;pointer-events:none;width:8px;height:14px;animation:fall var(--dur) linear forwards}@keyframes fall{to{transform:translate(var(--drift),110vh) rotate(800deg);opacity:.1}}
-@media(max-width:900px){.hero-photo{right:4%;width:32vw;opacity:.75}.hero-copy{max-width:67%}.story-grid,.reel{grid-template-columns:1fr}.story-image{min-height:370px}.reel-copy{text-align:center}.reel-copy .eyebrow{justify-content:center}}
-@media(max-width:650px){.nav{height:65px;padding:0 18px}.nav-link{display:none}.hero{min-height:780px;padding:120px 24px 95px}.hero-copy{max-width:100%}.hero-photo{width:44vw;right:-12%;top:10%;opacity:.2}.hero:before{background:linear-gradient(90deg,#10172df5,#10172dbb),linear-gradient(0deg,#10172d,transparent 70%)}h1{font-size:clamp(4.3rem,18vw,6.5rem)}.section{padding:74px 19px}.story-image{min-height:320px}.memes{grid-template-columns:1fr;max-width:420px}.meme-art{aspect-ratio:16/9}.reel{gap:24px}.greeting-card{padding:28px 19px}.ticker{font-size:.63rem}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}}
+:root{
+  --wine:#270710;--maroon:#4b0919;--red:#7f1327;--ruby:#a82936;
+  --gold:#e9bd66;--gold-lite:#ffe5a2;--orange:#e8752c;--amber:#ffae3e;
+  --cream:#fff1d8;--ink:#2d1118;--serif:Georgia,"Noto Serif Devanagari","Noto Serif Bengali",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:#10070b}
+body{margin:0;background:#10070b;color:var(--cream);font-family:var(--sans);overflow-x:hidden}
+button,input,textarea{font:inherit}button{cursor:pointer}
+.hidden{display:none!important}
+.scene{position:relative;min-height:100svh;min-height:100dvh;overflow:hidden;isolation:isolate}
+#opening{display:grid;place-items:center;padding:24px 16px;background:radial-gradient(ellipse at 50% 72%,#42101c 0%,#1d0911 55%,#09070a 100%)}
+.opening-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 55%,#e7883822,transparent 50%);pointer-events:none}
+/* Full-screen theatre curtains */
+.curtain-layer{position:absolute;inset:0;z-index:6;pointer-events:none;overflow:hidden}
+.curtain-panel{position:absolute;top:0;bottom:0;width:54%;background:
+  repeating-linear-gradient(90deg,transparent 0 5%,#21020a8a 6%,#e35a4a26 10%,transparent 14%,#18010877 18%,transparent 24%),
+  linear-gradient(90deg,#2b020c 0%,#780d20 13%,#4b0616 26%,#9f1b2c 42%,#4b0615 57%,#851126 78%,#28010b 100%);
+  box-shadow:inset 0 0 72px #080004,0 0 38px #090006;transition:transform 1.6s cubic-bezier(.76,0,.19,1)}
+.curtain-panel:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,#ffd5a016 0 2px,transparent 5px 22px,#10000665 28px 36px,transparent 43px 59px);mix-blend-mode:screen}
+.curtain-panel:after{content:"";position:absolute;top:0;bottom:0;width:23px;background:linear-gradient(90deg,#ffc56a5c,transparent);opacity:.5}
+.curtain-panel.left{left:0;border-right:4px solid #c58b4a55}
+.curtain-panel.right{right:0;transform:scaleX(-1);border-left:4px solid #c58b4a55}
+.curtain-valance{position:absolute;z-index:2;top:-4px;left:-3%;width:106%;height:clamp(75px,13vh,128px);background:
+  radial-gradient(ellipse at 50% 0%,#90162a 0 54%,transparent 57%) 0 0/86px 100px repeat-x,
+  linear-gradient(#751024,#37040f);filter:drop-shadow(0 12px 14px #080004b8);transition:transform .85s .25s}
+.curtain-valance:after{content:"";position:absolute;bottom:4px;left:0;width:100%;height:7px;background:linear-gradient(90deg,#815027,#f5d184,#9d542c,#ffe0a0,#77351d);box-shadow:0 3px 8px #120006}
+.curtain-open .curtain-panel.left{transform:translateX(-104%)}
+.curtain-open .curtain-panel.right{transform:translateX(104%) scaleX(-1)}
+.curtain-open .curtain-valance{transform:translateY(-125%)}
+/* The photo is revealed behind the curtains */
+.photo-reveal{position:absolute;z-index:2;left:50%;top:49%;width:min(72vw,360px);transform:translate(-50%,-50%) scale(.78);opacity:0;transition:opacity .65s .35s,transform .9s .35s}
+.curtain-open .photo-reveal{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.photo-frame{padding:10px;background:linear-gradient(135deg,#ffe9a4,#a56b2b 20%,#f9d47c 43%,#713a1a 67%,#ffe6a0);box-shadow:0 0 0 2px #7a3c20,0 0 0 7px #e5bb6e88,0 22px 70px #000b;border-radius:4px}
+.photo-box{aspect-ratio:4/5;max-height:53vh;display:grid;place-items:center;overflow:hidden;position:relative;background:radial-gradient(circle at 50% 45%,#f5b45e,#8f2830 57%,#2a0612)}
+.photo-box img{width:100%;height:100%;object-fit:cover}
+.photo-placeholder{text-align:center;color:#ffe9b6;padding:15px}
+.photo-placeholder .initial{display:block;font:500 clamp(3rem,12vw,5rem) var(--serif);text-shadow:0 3px 15px #3c0815}
+.photo-placeholder small{font-size:.62rem;letter-spacing:.16em}
+.photo-caption{text-align:center;color:#ffe9c4;font:italic 1rem var(--serif);padding-top:12px;text-shadow:0 2px 9px #130007}
+/* Teaser and edit controls stay above the curtains */
+.opening-ui{position:relative;z-index:9;width:min(100%,470px);text-align:center;padding:24px 10px 18px;transition:opacity .35s,transform .45s}
+.opening-ui.dismiss{opacity:0;transform:scale(.96);pointer-events:none}
+.eyebrow{font-size:.63rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-lite);font-weight:850}
+.speech{width:fit-content;max-width:96%;margin:18px auto 26px;background:var(--cream);color:#751529;border:1px solid #efc779;border-radius:17px;padding:13px 19px;box-shadow:0 7px 0 #96552d,0 12px 30px #10000788;font-weight:800;font-size:clamp(.9rem,3.8vw,1.08rem);position:relative;line-height:1.45}
+.speech:after{content:"";position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);border:13px solid transparent;border-top-color:var(--cream);border-bottom:0}
+.open-button{min-width:158px;padding:15px 34px;border:1px solid #fff0ba;border-radius:999px;background:linear-gradient(130deg,#fff0af,#e6a642);color:#4b1020;font-weight:950;letter-spacing:.22em;box-shadow:0 0 0 5px #edc16b22,0 14px 32px #10000688;transition:transform .18s}
+.open-button:active{transform:scale(.96)}
+.editor{width:min(100%,410px);margin:26px auto 0;text-align:left}
+.editor details{background:#1e020bd9;border:1px solid #dcae5b7a;border-radius:14px;backdrop-filter:blur(10px)}
+.editor summary{list-style:none;text-align:center;padding:11px 14px;color:#ffdfa0;font-size:.75rem;font-weight:800;cursor:pointer;letter-spacing:.04em}
+.editor summary::-webkit-details-marker{display:none}
+.editor-inner{padding:0 13px 14px;display:grid;gap:9px}
+.field{display:grid;gap:5px}.field label{font-size:.69rem;color:#f8dba0;font-weight:750}
+.field input[type=text],.field textarea{width:100%;border:1px solid #dbad6677;border-radius:8px;background:#fff7e9;color:#321019;padding:10px 11px;font-size:.84rem;outline:none}
+.field textarea{min-height:62px;resize:vertical}
+.field input[type=file]{font-size:.72rem;color:#fff0d9}
+.field input::file-selector-button{border:0;border-radius:7px;background:#efca77;color:#4c1020;padding:7px 9px;margin-right:7px;font-weight:800}
+.editor-note{font-size:.65rem;color:#d8bda6;line-height:1.45}
+/* Minimal black interstitial */
+#brand{position:fixed;inset:0;z-index:100;background:#030305;display:grid;place-items:center;opacity:0;visibility:hidden;transition:opacity .45s,visibility .45s}
+#brand.show{opacity:1;visibility:visible}
+.brand-lockup{text-align:center;color:#f0d18d;animation:logoIn .7s both}
+.brand-lockup .symbol{font-size:clamp(2.5rem,9vw,4.5rem);display:block}
+.brand-lockup strong{font:500 clamp(1.25rem,5vw,2rem) var(--serif);letter-spacing:.2em;display:block}
+.brand-lockup small{display:block;margin-top:12px;color:#a99480;font-size:.55rem;letter-spacing:.34em}
+@keyframes logoIn{from{opacity:0;transform:translateY(12px) scale(.95)}to{opacity:1;transform:none}}
+/* Orange dusk welcome */
+#welcome{display:grid;align-items:center;padding:132px 18px 205px;background:radial-gradient(ellipse at 35% 67%,#ff9e37 0%,#e45a25 30%,#8e2025 57%,#150b12 86%)}
+#welcome:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 35% 65%,#ffd46b3a,transparent 36%),linear-gradient(180deg,#09070d 0%,transparent 35%,#10070c88 100%);pointer-events:none}
+.bunting{position:absolute;z-index:3;top:0;left:0;width:100%;height:160px;transform-origin:top center;animation:stringSway 7s ease-in-out infinite alternate}
+@keyframes stringSway{from{transform:rotate(-.7deg)}to{transform:rotate(.7deg)}}
+.welcome-main{position:relative;z-index:4;text-align:center;width:min(100%,670px);margin:0 auto}
+.welcome-heading{font:500 clamp(3.4rem,14vw,7.1rem)/1.04 var(--serif);color:#ffe0a0;text-shadow:0 3px 0 #8e321b,0 9px 30px #260a10aa;margin:13px 0 4px}
+.welcome-heading .hindi{display:block;font-size:.72em;letter-spacing:.08em}
+.welcome-recipient{font:500 clamp(1.2rem,5vw,2rem) var(--serif);color:#fff0cf;margin:15px 0 8px}
+.welcome-line{font-size:.78rem;line-height:1.7;color:#ffe0bf;max-width:420px;margin:0 auto}
+.sun{position:absolute;z-index:1;left:35%;bottom:72px;transform:translateX(-50%);width:min(66vw,390px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 42% 38%,#ffcf64 0%,#fa8b37 48%,#e44726 74%,#ce3325 100%);box-shadow:0 0 95px #f9772c66}
+.hanuman{position:absolute;z-index:3;left:35%;bottom:35px;width:min(69vw,390px);height:auto;filter:drop-shadow(0 4px 5px #17070a66);transform-origin:50% 100%;animation:hanumanIdle 5.5s ease-in-out infinite}
+@keyframes hanumanIdle{0%,100%{transform:translateX(-50%) rotate(-.4deg)}50%{transform:translateX(-50%) translateY(-4px) rotate(.4deg)}}
+.skyline{position:absolute;z-index:2;left:0;bottom:0;width:100%;height:180px}
+.hanging-ornament{position:absolute;z-index:5;right:8%;top:34%;width:94px;height:170px;border:0;background:none;padding:0;filter:drop-shadow(0 7px 14px #16030b99);transform-origin:50% 0;animation:ornamentSwing 4s ease-in-out infinite alternate}
+@keyframes ornamentSwing{from{rotate:-3deg}to{rotate:3deg}}
+.hanging-ornament svg{width:100%;height:100%;overflow:visible}
+.hanging-ornament:focus-visible{outline:2px solid #ffe1a1;outline-offset:8px;border-radius:10px}
+.ornament-hint{position:absolute;top:calc(100% + 5px);left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.56rem;font-weight:800;letter-spacing:.05em;color:#ffe4a6;background:#2a0b14a8;padding:6px 9px;border-radius:99px}
+.hanging-ornament.popped{animation:none;transform:scale(1.24);opacity:0;transition:transform .35s,opacity .35s}
+#finalWish{position:relative;z-index:10;width:min(100%,590px);margin:25px auto 0;padding:21px 20px 19px;background:#1a0815db;border:1px solid #efc36e99;box-shadow:0 18px 45px #14050c88;backdrop-filter:blur(8px);opacity:0;transform:translateY(18px) scale(.97);pointer-events:none;transition:opacity .65s,transform .65s}
+#finalWish.show{opacity:1;transform:none;pointer-events:auto}
+.final-label{font-size:.6rem;text-transform:uppercase;letter-spacing:.2em;color:#edc977;font-weight:800}
+#finalWish h2{font:500 clamp(1.6rem,6vw,2.6rem) var(--serif);color:#ffe0a1;margin:9px 0}
+#finalWish p{font-size:.83rem;line-height:1.75;color:#f9e4cf;margin:0;white-space:pre-wrap}
+.signature{font:italic 1.02rem var(--serif);color:#f5c76f;margin-top:17px}
+.share-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.action{border:1px solid #e9bd72a8;background:#ffffff0d;color:#ffe8bc;border-radius:999px;padding:9px 12px;font-size:.68rem;font-weight:800}
+.action.primary{border:0;background:linear-gradient(130deg,#ffe6a3,#d8943a);color:#4b1220}
+#status{font-size:.66rem;color:#e4c5a0;line-height:1.5;margin:10px 0 0;min-height:1em}
+#fireworkCanvas{position:fixed;inset:0;width:100%;height:100%;z-index:80;pointer-events:none}
+@media(min-width:760px){.photo-reveal{width:300px}.editor{margin-top:28px}#welcome{padding-bottom:210px}.hanuman{width:320px}}
+@media(max-width:650px){#opening{padding:18px 14px}.opening-ui{padding-top:34px}.editor{margin-top:21px}.photo-reveal{width:min(74vw,340px)}#welcome{padding-top:137px;padding-bottom:240px}.sun{left:36%;bottom:82px;width:min(76vw,360px)}.hanuman{left:36%;bottom:29px;width:min(78vw,370px)}.skyline{height:150px}.hanging-ornament{right:4%;top:38%;width:78px;height:145px}#finalWish{margin-top:20px}}
+@media(max-height:720px){.opening-ui{padding-top:8px}.editor{margin-top:10px}.photo-reveal{width:min(52vw,270px)}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-<nav class="nav" aria-label="Main navigation"><div class="brand"><span class="brand-mark">✦</span> DIWALI MASTI</div><div class="nav-actions"><a class="nav-link" href="#moments">The Masti</a><a class="nav-link" href="#greeting">Your Greeting</a><button class="sound" id="soundBtn" aria-pressed="false">♫ Sound Off</button></div></nav>
-<header class="hero" id="home">
-<video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="https://images.unsplash.com/photo-1606293926075-69a00dbfde81?auto=format&fit=crop&w=1600&q=85"><source src="https://videos.pexels.com/video-files/11430440/11430440-uhd_4096_2160_30fps.mp4" type="video/mp4"></video>
-<span class="star s1">✦</span><span class="star s2">✧</span><span class="star s3">✦</span>
-<div class="hero-copy"><div class="eyebrow">The festival of lights · The festival of laughs</div><h1>Happy<br><em>Diwali!</em></h1><p class="lead">A little sparkle for your soul, a little chaos for your group chat, and a whole lot of love for the people who make life brighter.</p><div class="sticker">🚨 ALERT: Happiness levels are OFF THE CHARTS!</div><br><button class="btn-gold" id="startBtn">Enter the celebration&nbsp; ↗</button><p class="micro">Warning: May cause spontaneous dancing and suspicious mithai disappearances.</p></div>
-<div class="hero-photo"><img src="https://images.unsplash.com/photo-1606293926075-69a00dbfde81?auto=format&fit=crop&w=900&q=85" alt="Warm festive lights and Diwali decorations"><div class="photo-label">Light up every little moment.</div></div>
-</header>
-<div class="ticker"><div class="ticker-track"><span>GOOD VIBES ONLY ✦ EXTRA MITHAI ALWAYS ✦ LIGHTS ON, WORRIES OFF ✦ HAPPY DIWALI ✦</span><span>GOOD VIBES ONLY ✦ EXTRA MITHAI ALWAYS ✦ LIGHTS ON, WORRIES OFF ✦ HAPPY DIWALI ✦</span></div></div>
-<section class="section light" id="moments"><div class="section-head"><div class="eyebrow" style="color:#a34852">A festival-sized mood</div><h2>Tradition, with a<br>tiny plot twist.</h2><p>Every beautiful celebration deserves a few ridiculous moments. Consider this your official Diwali mood report.</p></div><div class="story-grid"><div class="story-image"><img src="https://images.unsplash.com/photo-1606293926075-69a00dbfde81?auto=format&fit=crop&w=1200&q=85" alt="Glowing festive lamps and warm lights"><div class="story-caption"><small>Scene 01 · The real magic</small><h3>Small lights.<br>Big feelings.</h3></div></div><div class="news"><small>The family bulletin · Breaking</small><h3>Local mithai box mysteriously empties.</h3><p>Witnesses report one person saying “I'm just tasting” before returning for the seventh time. Investigations are ongoing. The kaju katli has no comment.</p><div class="quote">“I was only checking if it was fresh.” — Every Diwali sweet-tooth, ever.</div></div></div></section>
-<section class="section dark"><div class="section-head"><div class="eyebrow">The meme department</div><h2>Too real to ignore. 😂</h2><p>Three highly relatable Diwali situations. Tag the friend who is definitely responsible.</p></div><div class="memes"><article class="meme"><div class="meme-art"><span class="stamp">CONFIDENTIAL</span><span class="meme-emoji">🍬🫣</span></div><div class="meme-copy"><small>Case file 001</small><h3>“Just one sweet.”</h3><p>Five minutes later: the box is empty and nobody saw a thing.</p></div></article><article class="meme"><div class="meme-art" style="background:linear-gradient(135deg,#8e3f50,#252345)"><span class="stamp">FAMILY GROUP</span><span class="meme-emoji">📸😵</span></div><div class="meme-copy"><small>Case file 002</small><h3>One perfect family photo.</h3><p>Someone blinked. Someone moved. Someone's phone is at 2%. Take 47.</p></div></article><article class="meme"><div class="meme-art" style="background:linear-gradient(135deg,#b36c32,#273e4d)"><span class="stamp">FESTIVE FIT</span><span class="meme-emoji">✨🕺</span></div><div class="meme-copy"><small>Case file 003</small><h3>Outfit: 10/10.</h3><p>Plans: stay elegant. Reality: dancing before the first snack.</p></div></article></div></section>
-<section class="section light"><div class="reel"><div class="reel-copy"><div class="eyebrow" style="color:#a34852">The Diwali reel</div><h2>Turn the sparkle up.</h2><p>A Diwali fireworks clip brings the festival atmosphere to the page. Tap play for the full-screen festive moment.</p><p style="font-size:.77rem;color:#8b737a">Video from Pexels · Use the video controls to play, pause or expand.</p></div><div><div class="video-frame"><video controls playsinline preload="metadata" poster="https://images.unsplash.com/photo-1606293926075-69a00dbfde81?auto=format&fit=crop&w=1200&q=85"><source src="https://videos.pexels.com/video-files/11430440/11430440-uhd_4096_2160_30fps.mp4" type="video/mp4">Your browser does not support HTML video.</video></div><div class="video-caption">Cinematic festival footage · Pexels</div></div></div></section>
-<section class="section dark" id="greeting"><div class="section-head"><div class="eyebrow">A note from Ganesh</div><h2>One wish. For everyone.</h2><p>For friends, siblings, family and everyone who feels like home.</p></div><div class="greeting"><div class="greeting-card"><div class="ornament">✿ ❋ ✿ ❋ ✿</div><div style="font-size:2rem;margin:14px 0">🪔 ✨ 🪔</div><h3>Happy Diwali!</h3><p>May this Diwali fill your life with happiness, laughter, endless blessings and beautiful memories. Wishing you and your family a sparkling and joyful Diwali!</p><div class="signature">With love, Ganesh</div><div style="font-size:1.7rem;margin:22px 0 12px">🌸 🎇 🌸</div><div class="ornament">✿ ❋ ✿ ❋ ✿</div></div><div class="actions"><button class="btn-gold" id="shareBtn">Share the greeting ↗</button><button class="btn-line" id="copyBtn">Copy message</button><button class="btn-line" id="againBtn">Celebrate again ✦</button></div><p id="status" aria-live="polite" style="font-size:.8rem;color:#d8c9c3;min-height:1.3em;margin-top:18px"></p></div></section>
-<footer>Designed with festive spirit, good humour & a little extra sparkle.<br><strong>With love, Ganesh</strong> 🪔<div class="credits">Media: <a href="https://unsplash.com/" target="_blank" rel="noopener">Unsplash</a> photography · <a href="https://www.pexels.com/" target="_blank" rel="noopener">Pexels</a> video. External media requires an internet connection.</div></footer>
+<!-- PERSONALIZATION_CONFIG_START -->
+<script>window.PERSONALIZATION={name:"Someone Special",wish:"May your home glow with happiness, your heart sparkle with hope, and your days be filled with laughter and love. Wishing you and your family a beautiful Diwali!",photo:""};</script>
+<!-- PERSONALIZATION_CONFIG_END -->
+<canvas id="fireworkCanvas" aria-hidden="true"></canvas>
+
+<section class="scene" id="opening" aria-label="Theatre curtain reveal">
+ <div class="opening-glow"></div>
+ <div class="photo-reveal" id="photoReveal"><div class="photo-frame"><div class="photo-box">
+  <div class="photo-placeholder" id="photoPlaceholder"><span class="initial" id="photoInitial">S</span><small>A LITTLE SURPRISE FOR YOU</small></div>
+  <img id="recipientPhoto" class="hidden" alt="Personalized recipient portrait">
+ </div></div><div class="photo-caption" id="photoCaption">A moment made just for you</div></div>
+ <div class="opening-ui" id="openingUI">
+  <div class="eyebrow">A little Diwali surprise</div>
+  <div class="speech" id="teaser">Psst... something special is waiting behind the curtains. ✨</div>
+  <button class="open-button" id="openBtn">OPEN</button>
+  <div class="editor"><details id="personalizeDetails"><summary>✦ Personalize your greeting</summary><div class="editor-inner">
+   <div class="field"><label for="nameInput">Recipient name</label><input id="nameInput" type="text" maxlength="48" value="Someone Special"></div>
+   <div class="field"><label for="photoInput">Recipient photo (optional)</label><input id="photoInput" type="file" accept="image/*"><span class="editor-note">Your photo stays in this browser. Download the personalized HTML to include it in the shareable file.</span></div>
+   <div class="field"><label for="wishInput">Personal wish</label><textarea id="wishInput" maxlength="420">May your home glow with happiness, your heart sparkle with hope, and your days be filled with laughter and love. Wishing you and your family a beautiful Diwali!</textarea></div>
+  </div></details></div>
+ </div>
+ <div class="curtain-layer" id="curtainLayer" aria-hidden="true"><div class="curtain-panel left"></div><div class="curtain-panel right"></div><div class="curtain-valance"></div></div>
+</section>
+
+<div id="brand" aria-hidden="true"><div class="brand-lockup"><span class="symbol">✺</span><strong>SHUBHO DIPABOLI</strong><small>A MOMENT MADE FOR YOU</small></div></div>
+
+<section class="scene" id="welcome" aria-label="Swagatam welcome screen">
+ <svg class="bunting" viewBox="0 0 1000 180" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M-20 0 Q250 180 500 42 Q750 180 1020 0" fill="none" stroke="#150b12" stroke-width="7"/><path d="M-20 0 Q250 180 500 42 Q750 180 1020 0" fill="none" stroke="#e8bb70" stroke-width="2"/>
+  <g stroke="#e8bb70" stroke-width="2"><path d="M105 66v24 M228 113v24 M370 114v24 M500 42v26 M630 114v24 M772 113v24 M895 66v24"/></g>
+  <g><circle cx="105" cy="97" r="9" fill="#ffcc66"/><circle cx="228" cy="141" r="8" fill="#f16b54"/><circle cx="370" cy="141" r="8" fill="#55c4a4"/><circle cx="500" cy="78" r="10" fill="#ffe39b"/><circle cx="630" cy="141" r="8" fill="#e982a0"/><circle cx="772" cy="141" r="8" fill="#64bfc9"/><circle cx="895" cy="97" r="9" fill="#ffd36d"/></g>
+  <g fill="#de9a48" stroke="#ffe5a2" stroke-width="2"><path d="M165 105q20 18 0 39q-20-21 0-39 M835 104q20 18 0 39q-20-21 0-39"/></g>
+ </svg>
+ <div class="sun" aria-hidden="true"></div>
+ <!-- Original inline silhouette illustration -->
+ <svg class="hanuman" viewBox="0 0 400 440" role="img" aria-label="Original Hanuman silhouette">
+  <g fill="#160b12" stroke="#160b12" stroke-linejoin="round" stroke-linecap="round">
+   <path d="M225 255 C330 218 378 298 331 345 C300 375 253 352 270 324 C282 306 307 318 298 333" fill="none" stroke-width="17"/>
+   <path d="M142 292 Q122 335 99 386 L64 410 Q48 427 72 430 L137 419 Q151 405 159 363 L193 326 L218 386 L196 412 Q187 431 215 431 L274 419 Q286 407 260 390 L255 328 L226 278Z"/>
+   <path d="M123 139 Q94 153 91 191 L113 283 Q151 317 240 294 Q271 265 249 184 L221 143 Q171 116 123 139Z"/>
+   <path d="M104 168 Q171 211 254 158 L272 193 Q187 245 120 207Z"/>
+   <path d="M111 161 Q72 183 59 230 L79 248 Q116 219 143 190Z"/><path d="M239 160 Q287 155 301 204 L281 220 Q252 199 226 188Z"/>
+   <circle cx="180" cy="98" r="47"/><path d="M151 110 Q180 143 211 110 Q207 151 179 155 Q150 148 151 110Z"/>
+   <path d="M130 66 L139 23 L160 43 L181 4 L201 43 L226 22 L235 72 Q183 56 130 72Z"/>
+   <path d="M304 91 L318 96 L284 304 L271 300Z"/><path d="M286 79 Q318 48 349 78 L355 96 Q321 126 286 103Z"/>
+  </g><g fill="#f0c16b"><circle cx="165" cy="97" r="4"/><circle cx="194" cy="97" r="4"/><circle cx="179" cy="131" r="4"/></g>
+  <path d="M124 234 Q181 263 253 224" fill="none" stroke="#b46e37" stroke-width="5" opacity=".55"/>
+ </svg>
+ <svg class="skyline" viewBox="0 0 1000 190" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0 145h48v-42h28V80h18v65h44v-30h28V83h22v62h33v-42h28v42h28v-76h13V54h9v15h12v76h37v-34h38v34h32V88h26v57h36v-26h23V80h15v-18h9v18h13v52h34v-25h36v25h28V83h18V60h9v23h15v62h43v-33h27v33h40v-56h22v-18h12v18h15v56h41v-43h26v43h49v-67h24v67h32v45H0Z" fill="#170b12"/><path d="M0 169h1000v21H0Z" fill="#0a080b"/>
+  <g fill="#f6bd62"><circle cx="75" cy="138" r="3"/><circle cx="287" cy="128" r="3"/><circle cx="515" cy="134" r="3"/><circle cx="737" cy="136" r="3"/><circle cx="927" cy="142" r="3"/></g>
+ </svg>
+ <div class="welcome-main"><div class="eyebrow">A little light for your world</div><h1 class="welcome-heading"><span class="hindi">स्वागतम्</span>Swagatam</h1><div class="welcome-recipient">Welcome, <span id="welcomeName">Someone Special</span>!</div><p class="welcome-line">A night of light, laughter and little surprises is waiting for you.</p></div>
+ <button class="hanging-ornament" id="ornamentBtn" aria-label="Tap the hanging festive firecracker for a surprise">
+  <svg viewBox="0 0 120 210" role="img" aria-label="Decorative festive firecracker"><path d="M60 0v28" stroke="#e9c56f" stroke-width="3"/><path d="M60 27q-12 10 0 18q12-8 0-18" fill="none" stroke="#ffdb8c" stroke-width="2"/><path d="M39 43q21-17 42 0v13q-21-14-42 0Z" fill="#e9bd69" stroke="#7b3c24" stroke-width="2"/><rect x="23" y="53" width="74" height="112" rx="29" fill="#176f55" stroke="#e8bf68" stroke-width="4"/><path d="M25 80h70v17H25Z" fill="#d64235"/><path d="M25 98h70v8H25Z" fill="#ffe1a0"/><path d="M25 124h70v16H25Z" fill="#d64235"/><path d="M39 59q-6 14 0 90 M55 56q-7 22 0 95 M74 55q-7 22 0 96" fill="none" stroke="#62b88d" stroke-width="4" opacity=".65"/><path d="M60 165v12" stroke="#d4aa5d" stroke-width="4"/><path d="M60 177q-10 8 0 17q10-8 0-17" fill="#f6bf55"/><circle cx="60" cy="110" r="6" fill="#f5d68a" opacity=".8"/></svg>
+  <span class="ornament-hint">TAP FOR SPARK</span>
+ </button>
+ <div id="finalWish"><div class="final-label">A wish made especially for you</div><h2 id="closingName">Someone Special</h2><p id="closingWish">May your home glow with happiness, your heart sparkle with hope, and your days be filled with laughter and love. Wishing you and your family a beautiful Diwali!</p><div class="signature">Shubho Dipaboli</div><div class="share-actions"><button class="action primary" id="shareBtn">Share greeting ↗</button><button class="action" id="copyBtn">Copy share link</button><button class="action" id="downloadBtn">Download personalized page</button><button class="action" id="replayBtn">Replay ✦</button></div><p id="status" aria-live="polite"></p></div>
+</section>
+
 <script>
-const greeting="Happy Diwali! May this Diwali fill your life with happiness, laughter, endless blessings and beautiful memories. Wishing you and your family a sparkling and joyful Diwali! With love, Ganesh.";
-let soundOn=false,audioCtx=null;
-function burst(x=innerWidth/2,y=innerHeight/2,count=36){const symbols=["✦","✧","✨","🌸","🪔"];for(let i=0;i<count;i++){const s=document.createElement("span");s.className="spark";s.textContent=symbols[Math.floor(Math.random()*symbols.length)];s.style.left=x+"px";s.style.top=y+"px";s.style.setProperty("--x",(Math.random()*320-160)+"px");s.style.setProperty("--y",(Math.random()*-270-20)+"px");document.body.appendChild(s);setTimeout(()=>s.remove(),1400)}}
-function confetti(){for(let i=0;i<95;i++){const p=document.createElement("i");p.className="confetti";p.style.left=Math.random()*100+"vw";p.style.background=["#e8b85e","#d84e79","#f18a42","#fff0cf","#4da4a0"][i%5];p.style.setProperty("--dur",(2.7+Math.random()*3)+"s");p.style.setProperty("--drift",(Math.random()*180-90)+"px");p.style.animationDelay=(Math.random()*.7)+"s";document.body.appendChild(p);setTimeout(()=>p.remove(),6500)}}
-function tone(freq=680,duration=.13){if(!soundOn)return;try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type="sine";o.frequency.value=freq;g.gain.setValueAtTime(.045,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+duration);o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+duration)}catch(e){}}
-document.getElementById("startBtn").addEventListener("click",e=>{burst(e.clientX||innerWidth/2,e.clientY||innerHeight/2,60);confetti();tone(880,.2);document.getElementById("moments").scrollIntoView({behavior:"smooth"})});
-document.getElementById("soundBtn").addEventListener("click",()=>{soundOn=!soundOn;const b=document.getElementById("soundBtn");b.textContent=soundOn?"♫ Sound On":"♫ Sound Off";b.setAttribute("aria-pressed",String(soundOn));tone(740,.15)});
-document.getElementById("shareBtn").addEventListener("click",async()=>{const data={title:"Happy Diwali — With love, Ganesh",text:greeting,url:location.href};try{if(navigator.share)await navigator.share(data);else{await navigator.clipboard.writeText(greeting+"\n\n"+location.href);document.getElementById("status").textContent="Greeting and website link copied — ready to share!"}}catch(e){if(e.name!=="AbortError")document.getElementById("status").textContent="Sharing is unavailable here. Try Copy message."}});
-document.getElementById("copyBtn").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(greeting);document.getElementById("status").textContent="Message copied! Paste it into WhatsApp. ❤️"}catch(e){document.getElementById("status").textContent="Clipboard needs HTTPS. You can select and copy the message manually."}});
-document.getElementById("againBtn").addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"});confetti();burst(innerWidth/2,innerHeight/2,55);tone(880,.2)});
-if(!matchMedia("(prefers-reduced-motion: reduce)").matches){setInterval(()=>{if(document.visibilityState==="visible")burst(Math.random()*innerWidth,Math.random()*innerHeight*.6,3)},7200)}
+(() => {
+ "use strict";
+ const DEFAULTS=window.PERSONALIZATION||{};
+ const params=new URLSearchParams(location.search);
+ const data={name:params.get("name")||DEFAULTS.name||"Someone Special",wish:params.get("wish")||DEFAULTS.wish||"May your home glow with happiness, your heart sparkle with hope, and your days be filled with laughter and love. Wishing you and your family a beautiful Diwali!",photo:DEFAULTS.photo||""};
+ const $=id=>document.getElementById(id);const canvas=$("fireworkCanvas"),ctx=canvas.getContext("2d");
+ let particles=[],raf=0,opened=false,popped=false,brandTimer=0;
+ function resize(){const d=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(innerWidth*d);canvas.height=Math.round(innerHeight*d);canvas.style.width=innerWidth+"px";canvas.style.height=innerHeight+"px";ctx.setTransform(d,0,0,d,0,0)}
+ addEventListener("resize",resize);resize();
+ function burst(x,y,n=90){const colors=["#fff0b0","#ffd05b","#ff8c3c","#ed5146","#fff8dc","#e99ab0","#9ee8c0"];for(let i=0;i<n;i++){const a=Math.PI*2*Math.random(),v=1.1+Math.random()*5.4;particles.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,life:48+Math.random()*42,max:90,size:1+Math.random()*2.8,color:colors[Math.floor(Math.random()*colors.length)],g:.025+Math.random()*.05})}if(!raf)raf=requestAnimationFrame(draw)}
+ function draw(){ctx.clearRect(0,0,innerWidth,innerHeight);particles=particles.filter(p=>p.life>0);for(const p of particles){p.x+=p.vx;p.y+=p.vy;p.vy+=p.g;p.vx*=.986;p.life--;ctx.globalAlpha=Math.max(0,p.life/p.max);ctx.fillStyle=p.color;ctx.shadowBlur=10;ctx.shadowColor=p.color;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fill()}ctx.globalAlpha=1;ctx.shadowBlur=0;if(particles.length)raf=requestAnimationFrame(draw);else{raf=0;ctx.clearRect(0,0,innerWidth,innerHeight)}}
+ function status(t){$("status").textContent=t}
+ function render(){
+  $("welcomeName").textContent=data.name;$("closingName").textContent=data.name;$("closingWish").textContent=data.wish;
+  $("photoCaption").textContent="A little surprise for "+data.name;$("photoInitial").textContent=(data.name.trim()[0]||"✦").toUpperCase();
+  if(data.photo){$("recipientPhoto").src=data.photo;$("recipientPhoto").classList.remove("hidden");$("photoPlaceholder").classList.add("hidden")}
+  else{$("recipientPhoto").removeAttribute("src");$("recipientPhoto").classList.add("hidden");$("photoPlaceholder").classList.remove("hidden")}
+ }
+ $("nameInput").value=data.name;$("wishInput").value=data.wish;
+ $("nameInput").addEventListener("input",e=>{data.name=e.target.value.trim()||"Someone Special";render()});
+ $("wishInput").addEventListener("input",e=>{data.wish=e.target.value.trim()||"Wishing you a joyful Diwali!";render()});
+ $("photoInput").addEventListener("change",e=>{const file=e.target.files&&e.target.files[0];if(!file)return;if(!file.type.startsWith("image/")){status("Please select an image file.");return}const reader=new FileReader();reader.onload=()=>{const im=new Image();im.onload=()=>{const scale=Math.min(1,1200/Math.max(im.width,im.height));const c=document.createElement("canvas");c.width=Math.round(im.width*scale);c.height=Math.round(im.height*scale);c.getContext("2d").drawImage(im,0,0,c.width,c.height);data.photo=c.toDataURL("image/jpeg",.86);render();status("Photo added. Download the personalized HTML to embed it for sharing.")};im.onerror=()=>status("Could not open that image. Try another photo.");im.src=reader.result};reader.readAsDataURL(file)});
+ render();
+ function openReveal(){if(opened)return;opened=true;$("opening").classList.add("curtain-open");$("openingUI").classList.add("dismiss");setTimeout(()=>{const r=$("photoReveal").getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;burst(x,y,110);setTimeout(()=>burst(x-r.width*.34,y,48),180);setTimeout(()=>burst(x+r.width*.34,y,48),330)},620);brandTimer=setTimeout(()=>{$("brand").classList.add("show");setTimeout(()=>{$("brand").classList.remove("show");$("welcome").scrollIntoView({behavior:"smooth",block:"start"})},1500)},2650)}
+ $("openBtn").addEventListener("click",openReveal);
+ function popOrnament(){if(popped)return;popped=true;const r=$("ornamentBtn").getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;burst(x,y,140);setTimeout(()=>burst(x-65,y-25,55),130);setTimeout(()=>burst(x+65,y+25,55),260);$("ornamentBtn").classList.add("popped");setTimeout(()=>{$("finalWish").classList.add("show");$("finalWish").scrollIntoView({behavior:"smooth",block:"nearest"})},520)}
+ $("ornamentBtn").addEventListener("click",popOrnament);
+ function shareLink(){const u=new URL(location.href);u.searchParams.set("name",data.name);u.searchParams.set("wish",data.wish);return u.toString()}
+ async function copy(text){if(navigator.clipboard&&isSecureContext){await navigator.clipboard.writeText(text);return true}return false}
+ $("copyBtn").addEventListener("click",async()=>{if(location.protocol==="file:"){status("Host this HTML on GitHub Pages or Netlify first to create a public link.");return}const u=shareLink();if(await copy(u))status("Personalized link copied. It includes the name and wish; export the HTML to include the photo.");else status("Copy this link: "+u)});
+ $("shareBtn").addEventListener("click",async()=>{if(location.protocol==="file:"){status("To share a link, host this HTML on GitHub Pages or Netlify first.");return}const url=shareLink(),payload={title:"Shubho Dipaboli — "+data.name,text:data.wish,url};try{if(navigator.share)await navigator.share(payload);else if(await copy(url))status("Share link copied!");else status("Copy this link: "+url)}catch(e){if(e.name!=="AbortError")status("Sharing is unavailable here. Use Copy share link.")}});
+ $("downloadBtn").addEventListener("click",()=>{let html="<!doctype html>\n"+document.documentElement.outerHTML;const a=html.indexOf("<!-- PERSONALIZATION_CONFIG_START -->"),b=html.indexOf("<!-- PERSONALIZATION_CONFIG_END -->");if(a<0||b<0){status("Could not prepare the personalized page.");return}const end=b+"<!-- PERSONALIZATION_CONFIG_END -->".length;const json=JSON.stringify(data).replace(/</g,"\\u003c");const block='<!-- PERSONALIZATION_CONFIG_START -->\n<script>window.PERSONALIZATION='+json+';</scr'+'ipt>\n<!-- PERSONALIZATION_CONFIG_END -->';html=html.slice(0,a)+block+html.slice(end);const blob=new Blob([html],{type:"text/html;charset=utf-8"}),url=URL.createObjectURL(blob),link=document.createElement("a"),slug=(data.name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,30)||"diwali");link.href=url;link.download="shubho-dipaboli-"+slug+".html";document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);status("Personalized HTML downloaded with your photo embedded.")});
+ $("replayBtn").addEventListener("click",()=>{opened=false;popped=false;clearTimeout(brandTimer);$("finalWish").classList.remove("show");$("ornamentBtn").classList.remove("popped");$("opening").classList.remove("curtain-open");$("openingUI").classList.remove("dismiss");$("brand").classList.remove("show");particles=[];ctx.clearRect(0,0,innerWidth,innerHeight);window.scrollTo({top:0,behavior:"smooth"});status("")});
+})();
 </script>
 </body>
 </html>
