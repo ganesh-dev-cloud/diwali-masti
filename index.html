@@ -19,7 +19,7 @@ body{margin:0;background:#10070b;color:var(--cream);font-family:var(--sans);over
 button,input,textarea{font:inherit}button{cursor:pointer}
 .hidden{display:none!important}
 .scene{position:relative;min-height:100svh;min-height:100dvh;overflow:hidden;isolation:isolate}
-#opening{display:grid;place-items:center;padding:24px 16px;background:radial-gradient(ellipse at 50% 72%,#42101c 0%,#1d0911 55%,#09070a 100%)}
+#opening{position:fixed;inset:0;z-index:20;display:grid;place-items:center;min-height:100svh;min-height:100dvh;padding:24px 16px;background:radial-gradient(ellipse at 50% 72%,#42101c 0%,#1d0911 55%,#09070a 100%);transition:opacity .65s ease,visibility .65s ease}#opening.leave{opacity:0;visibility:hidden;pointer-events:none}
 .opening-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 55%,#e7883822,transparent 50%);pointer-events:none}
 /* Full-screen theatre curtains */
 .curtain-layer{position:absolute;inset:0;z-index:6;pointer-events:none;overflow:hidden}
@@ -67,6 +67,20 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 .field input[type=file]{font-size:.72rem;color:#fff0d9}
 .field input::file-selector-button{border:0;border-radius:7px;background:#efca77;color:#4c1020;padding:7px 9px;margin-right:7px;font-weight:800}
 .editor-note{font-size:.65rem;color:#d8bda6;line-height:1.45}
+/* Full-screen photo + fireworks interlude, matching the reference video */
+#photoShow{position:fixed;inset:0;z-index:30;display:grid;place-items:center;min-height:100svh;background:radial-gradient(ellipse at 50% 52%,#160d16 0%,#050508 58%,#000 100%);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .75s ease,visibility .75s ease;overflow:hidden}
+#photoShow.active{opacity:1;visibility:visible;pointer-events:auto}
+#photoShow:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 55%,#a12c3820,transparent 52%);pointer-events:none}
+.showcase-card{position:relative;z-index:2;width:min(72vw,440px);aspect-ratio:4/3;padding:8px;border:1px solid #e5bd6c;border-radius:8px;background:linear-gradient(135deg,#ffe7a0,#8c5429 23%,#f9d37e 48%,#6d3c22 76%,#ffe6a2);box-shadow:0 0 0 2px #754321,0 20px 70px #000,0 0 50px #e89a4b44;opacity:0;transform:scale(.78) translateY(15px);animation:none}
+#photoShow.active .showcase-card{animation:showcaseIn .9s .2s cubic-bezier(.2,.8,.2,1) forwards}
+.showcase-photo{width:100%;height:100%;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 40%,#5d2735,#170c17 75%);color:#ffe4a2;text-align:center}
+.showcase-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.showcase-fallback{padding:20px;font:500 clamp(3rem,12vw,5.5rem) var(--serif);text-shadow:0 4px 22px #e89b43aa}
+.showcase-fallback small{display:block;margin-top:12px;font:800 .58rem var(--sans);letter-spacing:.22em}
+.showcase-caption{position:absolute;z-index:3;top:calc(100% + 16px);left:0;width:100%;text-align:center;color:#f4d69b;font:italic 1rem var(--serif);text-shadow:0 2px 14px #000}
+.showcase-sparkle{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 14% 28%,#fff3c822 0 2px,transparent 3px),radial-gradient(circle at 84% 68%,#fff3c822 0 2px,transparent 3px),radial-gradient(circle at 74% 19%,#fff3c822 0 1px,transparent 2px);background-size:180px 190px,230px 210px,140px 170px;animation:starDrift 8s linear infinite}
+@keyframes showcaseIn{to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes starDrift{from{transform:translateY(0)}to{transform:translateY(-35px)}}
 /* Minimal black interstitial */
 #brand{position:fixed;inset:0;z-index:100;background:#030305;display:grid;place-items:center;opacity:0;visibility:hidden;transition:opacity .45s,visibility .45s}
 #brand.show{opacity:1;visibility:visible}
@@ -76,17 +90,17 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 .brand-lockup small{display:block;margin-top:12px;color:#a99480;font-size:.55rem;letter-spacing:.34em}
 @keyframes logoIn{from{opacity:0;transform:translateY(12px) scale(.95)}to{opacity:1;transform:none}}
 /* Orange dusk welcome */
-#welcome{display:grid;align-items:center;padding:132px 18px 205px;background:radial-gradient(ellipse at 35% 67%,#ff9e37 0%,#e45a25 30%,#8e2025 57%,#150b12 86%)}
-#welcome:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 35% 65%,#ffd46b3a,transparent 36%),linear-gradient(180deg,#09070d 0%,transparent 35%,#10070c88 100%);pointer-events:none}
+#welcome{display:none;position:fixed;inset:0;z-index:40;min-height:100svh;min-height:100dvh;align-items:center;padding:108px 18px 150px;background:radial-gradient(ellipse at 8% 75%,#a12a27 0%,#571622 29%,transparent 58%),linear-gradient(180deg,#05060b 0%,#090810 54%,#210b14 100%)}#welcome.active{display:grid;animation:welcomeEnter .9s ease both}@keyframes welcomeEnter{from{opacity:0;transform:scale(1.015)}to{opacity:1;transform:scale(1)}}
+#welcome:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 75% 12%,#6d3b4820,transparent 35%),radial-gradient(ellipse at 15% 65%,#d13e3033,transparent 45%),linear-gradient(180deg,#030409 0%,transparent 45%,#120810 100%);pointer-events:none}
 .bunting{position:absolute;z-index:3;top:0;left:0;width:100%;height:160px;transform-origin:top center;animation:stringSway 7s ease-in-out infinite alternate}
 @keyframes stringSway{from{transform:rotate(-.7deg)}to{transform:rotate(.7deg)}}
-.welcome-main{position:relative;z-index:4;text-align:center;width:min(100%,670px);margin:0 auto}
-.welcome-heading{font:500 clamp(3.4rem,14vw,7.1rem)/1.04 var(--serif);color:#ffe0a0;text-shadow:0 3px 0 #8e321b,0 9px 30px #260a10aa;margin:13px 0 4px}
-.welcome-heading .hindi{display:block;font-size:.72em;letter-spacing:.08em}
+.welcome-main{position:relative;z-index:4;text-align:center;width:min(100%,760px);margin:-3vh auto 0}
+.welcome-heading{font:500 clamp(3.4rem,14vw,7.1rem)/1.04 var(--serif);color:#ffe0a0;text-shadow:0 3px 0 #8e321b,0 9px 30px #260a10aa;margin:18px 0 8px}
+.welcome-heading .hindi{display:block;font-size:clamp(3.5rem,13vw,7.4rem);letter-spacing:.08em}
 .welcome-recipient{font:500 clamp(1.2rem,5vw,2rem) var(--serif);color:#fff0cf;margin:15px 0 8px}
 .welcome-line{font-size:.78rem;line-height:1.7;color:#ffe0bf;max-width:420px;margin:0 auto}
-.sun{position:absolute;z-index:1;left:35%;bottom:72px;transform:translateX(-50%);width:min(66vw,390px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 42% 38%,#ffcf64 0%,#fa8b37 48%,#e44726 74%,#ce3325 100%);box-shadow:0 0 95px #f9772c66}
-.hanuman{position:absolute;z-index:3;left:35%;bottom:35px;width:min(69vw,390px);height:auto;filter:drop-shadow(0 4px 5px #17070a66);transform-origin:50% 100%;animation:hanumanIdle 5.5s ease-in-out infinite}
+.sun{display:none}
+.hanuman{display:none}
 @keyframes hanumanIdle{0%,100%{transform:translateX(-50%) rotate(-.4deg)}50%{transform:translateX(-50%) translateY(-4px) rotate(.4deg)}}
 .skyline{position:absolute;z-index:2;left:0;bottom:0;width:100%;height:180px}
 .hanging-ornament{position:absolute;z-index:5;right:8%;top:34%;width:94px;height:170px;border:0;background:none;padding:0;filter:drop-shadow(0 7px 14px #16030b99);transform-origin:50% 0;animation:ornamentSwing 4s ease-in-out infinite alternate}
@@ -95,8 +109,8 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 .hanging-ornament:focus-visible{outline:2px solid #ffe1a1;outline-offset:8px;border-radius:10px}
 .ornament-hint{position:absolute;top:calc(100% + 5px);left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.56rem;font-weight:800;letter-spacing:.05em;color:#ffe4a6;background:#2a0b14a8;padding:6px 9px;border-radius:99px}
 .hanging-ornament.popped{animation:none;transform:scale(1.24);opacity:0;transition:transform .35s,opacity .35s}
-#finalWish{position:relative;z-index:10;width:min(100%,590px);margin:25px auto 0;padding:21px 20px 19px;background:#1a0815db;border:1px solid #efc36e99;box-shadow:0 18px 45px #14050c88;backdrop-filter:blur(8px);opacity:0;transform:translateY(18px) scale(.97);pointer-events:none;transition:opacity .65s,transform .65s}
-#finalWish.show{opacity:1;transform:none;pointer-events:auto}
+#finalWish{position:fixed;z-index:110;left:50%;top:50%;width:min(calc(100vw - 32px),590px);max-height:min(82vh,720px);overflow:auto;margin:0;padding:21px 20px 19px;background:#1a0815ed;border:1px solid #efc36e99;box-shadow:0 18px 65px #000c;backdrop-filter:blur(12px);opacity:0;visibility:hidden;transform:translate(-50%,-44%) scale(.97);pointer-events:none;transition:opacity .65s,transform .65s,visibility .65s}
+#finalWish.show{opacity:1;visibility:visible;transform:translate(-50%,-50%) scale(1);pointer-events:auto}
 .final-label{font-size:.6rem;text-transform:uppercase;letter-spacing:.2em;color:#edc977;font-weight:800}
 #finalWish h2{font:500 clamp(1.6rem,6vw,2.6rem) var(--serif);color:#ffe0a1;margin:9px 0}
 #finalWish p{font-size:.83rem;line-height:1.75;color:#f9e4cf;margin:0;white-space:pre-wrap}
@@ -106,9 +120,9 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 .action.primary{border:0;background:linear-gradient(130deg,#ffe6a3,#d8943a);color:#4b1220}
 #status{font-size:.66rem;color:#e4c5a0;line-height:1.5;margin:10px 0 0;min-height:1em}
 #fireworkCanvas{position:fixed;inset:0;width:100%;height:100%;z-index:80;pointer-events:none}
-@media(min-width:760px){.photo-reveal{width:300px}.editor{margin-top:28px}#welcome{padding-bottom:210px}.hanuman{width:320px}}
-@media(max-width:650px){#opening{padding:18px 14px}.opening-ui{padding-top:34px}.editor{margin-top:21px}.photo-reveal{width:min(74vw,340px)}#welcome{padding-top:137px;padding-bottom:240px}.sun{left:36%;bottom:82px;width:min(76vw,360px)}.hanuman{left:36%;bottom:29px;width:min(78vw,370px)}.skyline{height:150px}.hanging-ornament{right:4%;top:38%;width:78px;height:145px}#finalWish{margin-top:20px}}
-@media(max-height:720px){.opening-ui{padding-top:8px}.editor{margin-top:10px}.photo-reveal{width:min(52vw,270px)}}
+@media(min-width:760px){.photo-reveal{width:300px}.editor{margin-top:28px}.showcase-card{width:min(42vw,470px)}#welcome{padding-bottom:130px}}
+@media(max-width:650px){#opening{padding:18px 14px}.opening-ui{padding-top:34px}.editor{margin-top:21px}.photo-reveal{width:min(74vw,340px)}#welcome{padding:90px 14px 125px}.skyline{height:145px}.hanging-ornament{right:4%;top:41%;width:92px;height:126px}.showcase-card{width:min(82vw,430px)}.showcase-caption{font-size:.9rem}#finalWish{padding:18px 16px}}
+@media(max-height:720px){.opening-ui{padding-top:8px}.editor{margin-top:10px}.photo-reveal{width:min(52vw,270px)}#welcome{padding-top:72px;padding-bottom:105px}.welcome-main{margin-top:0}.welcome-heading{margin:8px 0}.hanging-ornament{top:35%}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -137,6 +151,13 @@ button,input,textarea{font:inherit}button{cursor:pointer}
  <div class="curtain-layer" id="curtainLayer" aria-hidden="true"><div class="curtain-panel left"></div><div class="curtain-panel right"></div><div class="curtain-valance"></div></div>
 </section>
 
+<section id="photoShow" aria-label="Your photo revealed with Diwali fireworks">
+ <div class="showcase-sparkle" aria-hidden="true"></div>
+ <div class="showcase-card"><div class="showcase-photo">
+  <div class="showcase-fallback" id="showcaseFallback">S<small>A LITTLE SURPRISE FOR YOU</small></div>
+  <img id="showcasePhoto" class="hidden" alt="Your personalized Diwali photo">
+ </div><div class="showcase-caption" id="showcaseCaption">A little surprise for Someone Special</div></div>
+</section>
 <div id="brand" aria-hidden="true"><div class="brand-lockup"><span class="symbol">✺</span><strong>SHUBHO DIPABOLI</strong><small>A MOMENT MADE FOR YOU</small></div></div>
 
 <section class="scene" id="welcome" aria-label="Swagatam welcome screen">
@@ -165,9 +186,22 @@ button,input,textarea{font:inherit}button{cursor:pointer}
   <path d="M0 145h48v-42h28V80h18v65h44v-30h28V83h22v62h33v-42h28v42h28v-76h13V54h9v15h12v76h37v-34h38v34h32V88h26v57h36v-26h23V80h15v-18h9v18h13v52h34v-25h36v25h28V83h18V60h9v23h15v62h43v-33h27v33h40v-56h22v-18h12v18h15v56h41v-43h26v43h49v-67h24v67h32v45H0Z" fill="#170b12"/><path d="M0 169h1000v21H0Z" fill="#0a080b"/>
   <g fill="#f6bd62"><circle cx="75" cy="138" r="3"/><circle cx="287" cy="128" r="3"/><circle cx="515" cy="134" r="3"/><circle cx="737" cy="136" r="3"/><circle cx="927" cy="142" r="3"/></g>
  </svg>
- <div class="welcome-main"><div class="eyebrow">A little light for your world</div><h1 class="welcome-heading"><span class="hindi">स्वागतम्</span>Swagatam</h1><div class="welcome-recipient">Welcome, <span id="welcomeName">Someone Special</span>!</div><p class="welcome-line">A night of light, laughter and little surprises is waiting for you.</p></div>
+ <div class="welcome-main"><div class="eyebrow">A little light for your world</div><h1 class="welcome-heading"><span class="hindi">स्वागतम्</span></h1><div class="welcome-recipient">Welcome, <span id="welcomeName">Someone Special</span>!</div><p class="welcome-line">A night of light, laughter and little surprises is waiting for you.</p></div>
  <button class="hanging-ornament" id="ornamentBtn" aria-label="Tap the hanging festive firecracker for a surprise">
-  <svg viewBox="0 0 120 210" role="img" aria-label="Decorative festive firecracker"><path d="M60 0v28" stroke="#e9c56f" stroke-width="3"/><path d="M60 27q-12 10 0 18q12-8 0-18" fill="none" stroke="#ffdb8c" stroke-width="2"/><path d="M39 43q21-17 42 0v13q-21-14-42 0Z" fill="#e9bd69" stroke="#7b3c24" stroke-width="2"/><rect x="23" y="53" width="74" height="112" rx="29" fill="#176f55" stroke="#e8bf68" stroke-width="4"/><path d="M25 80h70v17H25Z" fill="#d64235"/><path d="M25 98h70v8H25Z" fill="#ffe1a0"/><path d="M25 124h70v16H25Z" fill="#d64235"/><path d="M39 59q-6 14 0 90 M55 56q-7 22 0 95 M74 55q-7 22 0 96" fill="none" stroke="#62b88d" stroke-width="4" opacity=".65"/><path d="M60 165v12" stroke="#d4aa5d" stroke-width="4"/><path d="M60 177q-10 8 0 17q10-8 0-17" fill="#f6bf55"/><circle cx="60" cy="110" r="6" fill="#f5d68a" opacity=".8"/></svg>
+  <svg viewBox="0 0 150 170" role="img" aria-label="Round green Diwali sutli firecracker with a lit fuse">
+   <path d="M76 12q-4 12 5 22" fill="none" stroke="#dfb36a" stroke-width="4" stroke-linecap="round"/>
+   <path d="M82 31q16 3 8 18" fill="none" stroke="#ef8a69" stroke-width="5" stroke-linecap="round"/>
+   <path d="M92 45l9-13" stroke="#ffda91" stroke-width="3" stroke-linecap="round"/>
+   <circle cx="77" cy="94" r="48" fill="#176d55" stroke="#b58a4f" stroke-width="3"/>
+   <g fill="none" stroke="#4ca581" stroke-width="6" stroke-linecap="round">
+    <path d="M43 61q-14 33 3 65"/><path d="M57 51q-13 42 3 86"/><path d="M75 47q-12 44 0 94"/><path d="M93 51q-10 42 3 84"/><path d="M109 62q-9 29 3 57"/>
+   </g>
+   <path d="M31 80q45-18 91 0v25q-46-18-91 0Z" fill="#d73c35" stroke="#f3c978" stroke-width="3"/>
+   <path d="M32 89q44-15 89 0" fill="none" stroke="#ffe5a0" stroke-width="4"/>
+   <path d="M32 110q45-18 90 0" fill="none" stroke="#d6a85f" stroke-width="3"/>
+   <circle cx="78" cy="94" r="4" fill="#ffe5a0"/>
+   <path d="M76 141q-9 10 0 17q10-8 0-17" fill="#e0b461"/>
+  </svg>
   <span class="ornament-hint">TAP FOR SPARK</span>
  </button>
  <div id="finalWish"><div class="final-label">A wish made especially for you</div><h2 id="closingName">Someone Special</h2><p id="closingWish">May your home glow with happiness, your heart sparkle with hope, and your days be filled with laughter and love. Wishing you and your family a beautiful Diwali!</p><div class="signature">Shubho Dipaboli</div><div class="share-actions"><button class="action primary" id="shareBtn">Share greeting ↗</button><button class="action" id="copyBtn">Copy share link</button><button class="action" id="downloadBtn">Download personalized page</button><button class="action" id="replayBtn">Replay ✦</button></div><p id="status" aria-live="polite"></p></div>
@@ -189,24 +223,60 @@ button,input,textarea{font:inherit}button{cursor:pointer}
  function render(){
   $("welcomeName").textContent=data.name;$("closingName").textContent=data.name;$("closingWish").textContent=data.wish;
   $("photoCaption").textContent="A little surprise for "+data.name;$("photoInitial").textContent=(data.name.trim()[0]||"✦").toUpperCase();
-  if(data.photo){$("recipientPhoto").src=data.photo;$("recipientPhoto").classList.remove("hidden");$("photoPlaceholder").classList.add("hidden")}
-  else{$("recipientPhoto").removeAttribute("src");$("recipientPhoto").classList.add("hidden");$("photoPlaceholder").classList.remove("hidden")}
+  $("showcaseCaption").textContent="A little surprise for "+data.name;
+  $("showcaseFallback").firstChild.textContent=(data.name.trim()[0]||"✦").toUpperCase();
+  if(data.photo){
+   $("recipientPhoto").src=data.photo;$("recipientPhoto").classList.remove("hidden");$("photoPlaceholder").classList.add("hidden");
+   $("showcasePhoto").src=data.photo;$("showcasePhoto").classList.remove("hidden");$("showcaseFallback").classList.add("hidden");
+  }else{
+   $("recipientPhoto").removeAttribute("src");$("recipientPhoto").classList.add("hidden");$("photoPlaceholder").classList.remove("hidden");
+   $("showcasePhoto").removeAttribute("src");$("showcasePhoto").classList.add("hidden");$("showcaseFallback").classList.remove("hidden");
+  }
  }
  $("nameInput").value=data.name;$("wishInput").value=data.wish;
  $("nameInput").addEventListener("input",e=>{data.name=e.target.value.trim()||"Someone Special";render()});
  $("wishInput").addEventListener("input",e=>{data.wish=e.target.value.trim()||"Wishing you a joyful Diwali!";render()});
  $("photoInput").addEventListener("change",e=>{const file=e.target.files&&e.target.files[0];if(!file)return;if(!file.type.startsWith("image/")){status("Please select an image file.");return}const reader=new FileReader();reader.onload=()=>{const im=new Image();im.onload=()=>{const scale=Math.min(1,1200/Math.max(im.width,im.height));const c=document.createElement("canvas");c.width=Math.round(im.width*scale);c.height=Math.round(im.height*scale);c.getContext("2d").drawImage(im,0,0,c.width,c.height);data.photo=c.toDataURL("image/jpeg",.86);render();status("Photo added. Download the personalized HTML to embed it for sharing.")};im.onerror=()=>status("Could not open that image. Try another photo.");im.src=reader.result};reader.readAsDataURL(file)});
  render();
- function openReveal(){if(opened)return;opened=true;$("opening").classList.add("curtain-open");$("openingUI").classList.add("dismiss");setTimeout(()=>{const r=$("photoReveal").getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;burst(x,y,110);setTimeout(()=>burst(x-r.width*.34,y,48),180);setTimeout(()=>burst(x+r.width*.34,y,48),330)},620);brandTimer=setTimeout(()=>{$("brand").classList.add("show");setTimeout(()=>{$("brand").classList.remove("show");$("welcome").scrollIntoView({behavior:"smooth",block:"start"})},1500)},2650)}
+ let audioCtx=null;
+ function fireworkSound(){
+  try{
+   const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
+   if(!audioCtx)audioCtx=new AC();if(audioCtx.state==="suspended")audioCtx.resume();
+   const t=audioCtx.currentTime;
+   const osc=audioCtx.createOscillator(),gain=audioCtx.createGain();
+   osc.type="sawtooth";osc.frequency.setValueAtTime(420,t);osc.frequency.exponentialRampToValueAtTime(75,t+.34);
+   gain.gain.setValueAtTime(.0001,t);gain.gain.exponentialRampToValueAtTime(.16,t+.025);gain.gain.exponentialRampToValueAtTime(.0001,t+.4);
+   osc.connect(gain);gain.connect(audioCtx.destination);osc.start(t);osc.stop(t+.42);
+   const length=Math.floor(audioCtx.sampleRate*.26),buffer=audioCtx.createBuffer(1,length,audioCtx.sampleRate),arr=buffer.getChannelData(0);
+   for(let k=0;k<length;k++)arr[k]=(Math.random()*2-1)*(1-k/length);
+   const noise=audioCtx.createBufferSource(),filter=audioCtx.createBiquadFilter(),ng=audioCtx.createGain();
+   noise.buffer=buffer;filter.type="highpass";filter.frequency.value=1300;ng.gain.setValueAtTime(.0001,t+.16);ng.gain.exponentialRampToValueAtTime(.13,t+.19);ng.gain.exponentialRampToValueAtTime(.0001,t+.48);
+   noise.connect(filter);filter.connect(ng);ng.connect(audioCtx.destination);noise.start(t+.16);noise.stop(t+.49);
+  }catch(e){}
+ }
+ function startPhotoShow(){
+  const points=[[.22,.28],[.78,.32],[.5,.72],[.18,.68],[.82,.66],[.5,.18]];
+  points.forEach((p,k)=>setTimeout(()=>{burst(innerWidth*p[0],innerHeight*p[1],k===2?125:88);fireworkSound()},450+k*1050));
+ }
+ function openReveal(){
+  if(opened)return;opened=true;fireworkSound();
+  $("opening").classList.add("curtain-open");$("openingUI").classList.add("dismiss");
+  setTimeout(()=>{$("opening").classList.add("leave");$("photoShow").classList.add("active");startPhotoShow()},1550);
+  brandTimer=setTimeout(()=>{
+   $("brand").classList.add("show");
+   setTimeout(()=>{$("photoShow").classList.remove("active");$("welcome").classList.add("active");$("brand").classList.remove("show")},950);
+  },7900);
+ }
  $("openBtn").addEventListener("click",openReveal);
- function popOrnament(){if(popped)return;popped=true;const r=$("ornamentBtn").getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;burst(x,y,140);setTimeout(()=>burst(x-65,y-25,55),130);setTimeout(()=>burst(x+65,y+25,55),260);$("ornamentBtn").classList.add("popped");setTimeout(()=>{$("finalWish").classList.add("show");$("finalWish").scrollIntoView({behavior:"smooth",block:"nearest"})},520)}
+ function popOrnament(){if(popped)return;popped=true;const r=$("ornamentBtn").getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;burst(x,y,140);fireworkSound();setTimeout(()=>{burst(x-65,y-25,55);fireworkSound()},130);setTimeout(()=>{burst(x+65,y+25,55);fireworkSound()},260);$("ornamentBtn").classList.add("popped");setTimeout(()=>$("finalWish").classList.add("show"),520)}
  $("ornamentBtn").addEventListener("click",popOrnament);
  function shareLink(){const u=new URL(location.href);u.searchParams.set("name",data.name);u.searchParams.set("wish",data.wish);return u.toString()}
  async function copy(text){if(navigator.clipboard&&isSecureContext){await navigator.clipboard.writeText(text);return true}return false}
  $("copyBtn").addEventListener("click",async()=>{if(location.protocol==="file:"){status("Host this HTML on GitHub Pages or Netlify first to create a public link.");return}const u=shareLink();if(await copy(u))status("Personalized link copied. It includes the name and wish; export the HTML to include the photo.");else status("Copy this link: "+u)});
  $("shareBtn").addEventListener("click",async()=>{if(location.protocol==="file:"){status("To share a link, host this HTML on GitHub Pages or Netlify first.");return}const url=shareLink(),payload={title:"Shubho Dipaboli — "+data.name,text:data.wish,url};try{if(navigator.share)await navigator.share(payload);else if(await copy(url))status("Share link copied!");else status("Copy this link: "+url)}catch(e){if(e.name!=="AbortError")status("Sharing is unavailable here. Use Copy share link.")}});
  $("downloadBtn").addEventListener("click",()=>{let html="<!doctype html>\n"+document.documentElement.outerHTML;const a=html.indexOf("<!-- PERSONALIZATION_CONFIG_START -->"),b=html.indexOf("<!-- PERSONALIZATION_CONFIG_END -->");if(a<0||b<0){status("Could not prepare the personalized page.");return}const end=b+"<!-- PERSONALIZATION_CONFIG_END -->".length;const json=JSON.stringify(data).replace(/</g,"\\u003c");const block='<!-- PERSONALIZATION_CONFIG_START -->\n<script>window.PERSONALIZATION='+json+';</scr'+'ipt>\n<!-- PERSONALIZATION_CONFIG_END -->';html=html.slice(0,a)+block+html.slice(end);const blob=new Blob([html],{type:"text/html;charset=utf-8"}),url=URL.createObjectURL(blob),link=document.createElement("a"),slug=(data.name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,30)||"diwali");link.href=url;link.download="shubho-dipaboli-"+slug+".html";document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);status("Personalized HTML downloaded with your photo embedded.")});
- $("replayBtn").addEventListener("click",()=>{opened=false;popped=false;clearTimeout(brandTimer);$("finalWish").classList.remove("show");$("ornamentBtn").classList.remove("popped");$("opening").classList.remove("curtain-open");$("openingUI").classList.remove("dismiss");$("brand").classList.remove("show");particles=[];ctx.clearRect(0,0,innerWidth,innerHeight);window.scrollTo({top:0,behavior:"smooth"});status("")});
+ $("replayBtn").addEventListener("click",()=>{opened=false;popped=false;clearTimeout(brandTimer);$("finalWish").classList.remove("show");$("ornamentBtn").classList.remove("popped");$("photoShow").classList.remove("active");$("welcome").classList.remove("active");$("opening").classList.remove("leave","curtain-open");$("openingUI").classList.remove("dismiss");$("brand").classList.remove("show");particles=[];ctx.clearRect(0,0,innerWidth,innerHeight);status("")});
 })();
 </script>
 </body>
