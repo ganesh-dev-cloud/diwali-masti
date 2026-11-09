@@ -254,13 +254,13 @@ button,input,textarea{font:inherit}button{cursor:pointer}
   $("teaser").textContent="Wait for the surprise, "+data.name+"! ✨";
   $("photoCaption").textContent="A little surprise for "+data.name;$("photoInitial").textContent=(data.name.trim()[0]||"✦").toUpperCase();
   $("showcaseCaption").textContent="A little surprise for "+data.name;
-  $("showcaseFallback").firstChild.textContent=(data.name.trim()[0]||"✦").toUpperCase();
+  // The reveal scene now plays video inside the golden frame. The old
+  // showcasePhoto/showcaseFallback nodes were removed, so only update the
+  // recipient portrait in the opening scene.
   if(data.photo){
    $("recipientPhoto").src=data.photo;$("recipientPhoto").classList.remove("hidden");$("photoPlaceholder").classList.add("hidden");
-   $("showcasePhoto").src=data.photo;$("showcasePhoto").classList.remove("hidden");$("showcaseFallback").classList.add("hidden");
   }else{
    $("recipientPhoto").removeAttribute("src");$("recipientPhoto").classList.add("hidden");$("photoPlaceholder").classList.remove("hidden");
-   $("showcasePhoto").removeAttribute("src");$("showcasePhoto").classList.add("hidden");$("showcaseFallback").classList.remove("hidden");
   }
  }
  $("nameInput").value=data.name;$("wishInput").value=data.wish;
