@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#270710">
-<meta name="description" content="A personalized Diwali reveal greeting — Shubho Dipaboli!">
+<meta name="description" content="A cinematic, personalized Diwali surprise."><meta property="og:type" content="website"><meta property="og:title" content="Shubho Dipaboli · A little surprise"><meta property="og:description" content="Open the curtains for a little Diwali magic."><meta property="og:image" content="https://ganesh-dev-cloud.github.io/diwali-masti/assets/diwali/og-preview.svg"><meta name="twitter:card" content="summary_large_image"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./assets/diwali/app-icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="./assets/diwali/app-icon.svg">
 <title>Shubho Dipaboli · A little surprise</title>
 <style>
 :root{
@@ -38,6 +38,12 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 .curtain-open .curtain-panel.left{transform:translateX(-104%)}
 .curtain-open .curtain-panel.right{transform:translateX(104%) scaleX(-1)}
 .curtain-open .curtain-valance{transform:translateY(-125%)}
+.curtain-panel.left{transform:translate3d(calc(var(--curtain-x,0)*-1px),calc(var(--curtain-y,0)*.5px),0)}
+.curtain-panel.right{transform:translate3d(calc(var(--curtain-x,0)*1px),calc(var(--curtain-y,0)*.5px),0) scaleX(-1)}
+.curtain-panel:after{content:"";inset:0;width:auto;opacity:.25;background:linear-gradient(108deg,transparent 18%,#fff2d122 34%,#ffe4aa55 48%,transparent 73%);background-size:220% 100%;animation:velvetShimmer 8s ease-in-out infinite}
+@keyframes velvetShimmer{0%,100%{background-position:140% 0;opacity:.12}50%{background-position:-40% 0;opacity:.38}}
+.light-beam{position:absolute;z-index:4;inset:-20%;pointer-events:none;opacity:0;background:radial-gradient(ellipse at 50% 48%,#fff2c84d 0%,#f4c36b25 22%,transparent 62%);filter:blur(14px);transition:opacity .9s;mix-blend-mode:screen}
+.curtain-open .light-beam{opacity:1;animation:beamSweep 1.5s ease-out both}@keyframes beamSweep{0%{transform:scaleX(.08);opacity:0}35%{opacity:.9}100%{transform:scaleX(1.35);opacity:.22}}
 /* The photo is revealed behind the curtains */
 .photo-reveal{position:absolute;z-index:2;left:50%;top:49%;width:min(72vw,360px);transform:translate(-50%,-50%) scale(.78);opacity:0;transition:opacity .65s .35s,transform .9s .35s}
 .curtain-open .photo-reveal{opacity:1;transform:translate(-50%,-50%) scale(1)}
@@ -135,7 +141,16 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 .opening-ui .eyebrow{display:none}
 .speech{margin:0 auto 24px;background:#fff7e8;color:#7d1524;border-radius:22px;padding:10px 18px;box-shadow:0 4px 0 #a76a3b,0 12px 30px #0008;font-size:clamp(.86rem,3.5vw,1rem)}
 .open-button{min-width:132px;padding:12px 28px;border-radius:9px;letter-spacing:.12em}
-.editor{display:none}
+.editor{display:block;width:min(100%,760px);margin:18px auto 0;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(16px);transition:.45s}
+#opening.personalizing .editor{opacity:1;visibility:visible;pointer-events:auto;transform:none}
+#opening.personalizing .opening-ui{width:min(100%,850px);padding:10px 6px}
+#opening.personalizing .opening-ui>.eyebrow,#opening.personalizing .speech,#opening.personalizing #openBtn{display:none}
+.form-glass{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(130px,.8fr);gap:14px;padding:clamp(12px,3vw,22px);text-align:left;border:1px solid #f3d18b77;border-radius:22px;background:linear-gradient(135deg,#fff5e51f,#4a102cbb 55%,#100b18d9);box-shadow:0 22px 70px #0009;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.stepper{display:flex;gap:5px;margin-bottom:14px}.step-dot{flex:1;min-width:0;border:0;border-radius:99px;padding:8px 3px;background:#fff1d714;color:#e9cfac;font-size:.6rem;font-weight:800}.step-dot[aria-current=step]{background:linear-gradient(120deg,#ffe5a2,#d99642);color:#40101c}
+.form-step{display:none;min-height:140px}.form-step.active{display:grid;align-content:start;gap:10px}.form-step h3{margin:0;color:#ffe4a6;font:600 1.05rem var(--serif)}
+.form-nav{display:flex;justify-content:space-between;gap:10px;margin-top:14px}.form-nav button{border:1px solid #f5d48d88;border-radius:99px;padding:10px 17px;background:#ffffff12;color:#ffedca;font-size:.72rem;font-weight:850}.form-nav .next-step{background:linear-gradient(120deg,#ffe8a9,#e6a344);color:#4b1020;border:0}
+.live-preview{align-self:stretch;display:grid;align-content:center;justify-items:center;gap:8px;padding:9px;border:1px solid #f4d18b55;border-radius:15px;background:#08060b66}.preview-card{width:min(100%,180px);aspect-ratio:4/5;border:5px solid #d7a953;padding:5px;background:radial-gradient(circle,#a73b31,#210812);display:grid;grid-template-rows:1fr auto;overflow:hidden}.preview-card img{width:100%;height:100%;object-fit:cover}.preview-card strong{text-align:center;padding:5px 2px;color:#ffe7ad;font:600 .78rem var(--serif);overflow-wrap:anywhere}.preview-note{font-size:.56rem;color:#e4c9a4}
+@media(max-width:620px){.form-glass{grid-template-columns:minmax(0,1fr) 108px;gap:8px;padding:11px}.preview-card{max-width:105px}.step-dot{font-size:.5rem;padding:7px 1px}.form-step{min-height:160px}}@media(max-width:380px){.form-glass{grid-template-columns:1fr}.live-preview{display:none}}
 #photoShow{background:radial-gradient(ellipse at 50% 55%,#21121b 0%,#050508 58%,#000 100%)}
 .showcase-card{width:min(64vw,340px);aspect-ratio:4/5;border-radius:5px}
 .showcase-photo{background:#08070b}
@@ -187,13 +202,23 @@ button,input,textarea{font:inherit}button{cursor:pointer}
  .skyline{height:100px}
 }
 
+
+.video-loader{position:absolute;z-index:4;inset:0;display:grid;place-content:center;gap:12px;text-align:center;background:linear-gradient(115deg,#100913,#3a1528,#100913);background-size:220% 100%;color:#ffe3a0;letter-spacing:.2em;font-size:.58rem;animation:loadingSheen .75s ease-in-out infinite}.video-loader span{width:50px;height:50px;margin:auto;border:1px solid #f4d18b;border-radius:50%;box-shadow:0 0 24px #f3c66b88;animation:loaderPulse .7s infinite alternate}.video-loader.hidden{display:none!important}@keyframes loadingSheen{to{background-position:-220% 0}}@keyframes loaderPulse{to{transform:scale(1.1);opacity:.45}}
+#photoShow.ending{opacity:0;transform:scale(1.02);transition:opacity .7s,transform .7s;pointer-events:none}
+#ambientCanvas{position:fixed;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;opacity:.6}
+.bunting{filter:drop-shadow(0 0 9px #ffca6733);animation:stringSway 7s ease-in-out infinite alternate,buntingPulse 3.2s ease-in-out infinite}@keyframes buntingPulse{50%{filter:drop-shadow(0 0 15px #ffca6780)}}
+.sun,.hanuman,.skyline,.bunting{translate:calc(var(--welcome-x,0)*.45px) calc(var(--welcome-y,0)*.45px)}
+.hanuman{filter:drop-shadow(0 0 15px #f5a13c44) drop-shadow(0 5px 8px #050207a8)}
+.qr-panel{display:grid;justify-items:center;gap:7px;margin:13px auto 0;padding:12px;width:fit-content;border-radius:14px;background:#fff;color:#28101a;font-size:.65rem;font-weight:800}.qr-panel.hidden{display:none!important}.qr-panel img{width:132px;height:132px}
+@media(prefers-reduced-motion:reduce){.curtain-panel:after,.bunting,.video-loader,.video-loader span{animation:none!important}.light-beam{filter:none}}
+
 </style>
 </head>
 <body>
 <!-- PERSONALIZATION_CONFIG_START -->
 <script>window.PERSONALIZATION={name:"Someone Special",wish:"May your home glow with happiness, your heart sparkle with hope, and your days be filled with laughter and love. Wishing you and your family a beautiful Diwali!",photo:""};</script>
 <!-- PERSONALIZATION_CONFIG_END -->
-<canvas id="fireworkCanvas" aria-hidden="true"></canvas>
+<canvas id="ambientCanvas" aria-hidden="true"></canvas><canvas id="fireworkCanvas" aria-hidden="true"></canvas>
 
 <section class="scene" id="opening" aria-label="Theatre curtain reveal">
  <div class="opening-glow"></div>
@@ -205,26 +230,27 @@ button,input,textarea{font:inherit}button{cursor:pointer}
   <div class="eyebrow">A little Diwali surprise</div>
   <div class="speech" id="teaser">Psst... something special is waiting behind the curtains. ✨</div>
   <button class="open-button" id="openBtn">OPEN</button>
-  <div class="editor"><details id="personalizeDetails"><summary>✦ Personalize your greeting</summary><div class="editor-inner">
-   <div class="field"><label for="nameInput">Recipient name</label><input id="nameInput" type="text" maxlength="48" value="Someone Special"></div>
-   <div class="field"><label for="photoInput">Recipient photo (optional)</label><input id="photoInput" type="file" accept="image/*"><span class="editor-note">Your photo stays in this browser. Download the personalized HTML to include it in the shareable file.</span></div>
-   <div class="field"><label for="wishInput">Personal wish</label><textarea id="wishInput" maxlength="420">May your home glow with happiness, your heart sparkle with hope, and your days be filled with laughter and love. Wishing you and your family a beautiful Diwali!</textarea></div>
-  </div></details></div>
+  <div class="editor" id="editor"><div class="form-glass"><div class="form-controls">
+<div class="stepper"><button class="step-dot" data-step-dot="0" aria-current="step">1 Name</button><button class="step-dot" data-step-dot="1">2 Photo</button><button class="step-dot" data-step-dot="2">3 Wish</button><button class="step-dot" data-step-dot="3">4 Preview</button></div>
+<section class="form-step active" data-step="0"><h3>Who is this surprise for?</h3><div class="field"><label for="nameInput">Recipient name</label><input id="nameInput" type="text" maxlength="48" value="Someone Special" autocomplete="name"></div></section>
+<section class="form-step" data-step="1"><h3>Add a personal touch</h3><div class="field"><label for="photoInput">Recipient photo (optional)</label><input id="photoInput" type="file" accept="image/*"><span class="editor-note">Your photo stays in this browser.</span></div></section>
+<section class="form-step" data-step="2"><h3>Write a heartfelt wish</h3><div class="field"><label for="wishInput">Your Diwali message</label><textarea id="wishInput" maxlength="420">May your home glow with happiness, your heart sparkle with hope, and your days be filled with laughter and love. Wishing you and your family a beautiful Diwali!</textarea></div></section>
+<section class="form-step" data-step="3"><h3>Your greeting is ready</h3><p class="editor-note">Review the live card, then start the surprise video.</p></section>
+<div class="form-nav"><button id="backStep" type="button" disabled>Back</button><button id="nextStep" class="next-step" type="button">Continue →</button></div></div>
+<aside class="live-preview"><div class="preview-card"><img id="previewPhoto" class="hidden" alt="Live preview"><strong id="previewName">Someone Special</strong></div><span class="preview-note">LIVE GREETING PREVIEW</span></aside></div></div>
  </div>
- <div class="curtain-layer" id="curtainLayer" aria-hidden="true"><div class="curtain-panel left"></div><div class="curtain-panel right"></div><div class="curtain-valance"></div></div>
+ <div class="curtain-layer" id="curtainLayer" aria-hidden="true"><div class="light-beam"></div><div class="curtain-panel left"></div><div class="curtain-panel right"></div><div class="curtain-valance"></div></div>
 </section>
 
 <section id="photoShow" aria-label="Diwali surprise video playing inside the golden frame">
   <div class="showcase-sparkle" aria-hidden="true"></div>
   <div class="showcase-card"><div class="showcase-photo" id="photoFallback">
-   <video id="revealVideo" class="diwali-video" playsinline preload="auto" aria-label="Diwali surprise video">
-    <source src="assets/diwali/jethalal-surprise.mp4" type="video/mp4">
-   </video>
+   <video id="revealVideo" class="diwali-video" playsinline preload="none" aria-label="Diwali surprise video" poster="assets/diwali/og-preview.svg" data-src="assets/diwali/surprise-video.mp4"></video><div class="video-loader hidden" id="videoLoader"><span></span><small>PREPARING YOUR SURPRISE</small></div>
    <div class="reveal-video-fallback hidden" id="revealVideoFallback">Tap to play your Diwali surprise</div>
   </div><div class="showcase-caption" id="showcaseCaption">A little surprise for Someone Special</div></div>
  </section>
 <div id="brand" aria-hidden="true"><div class="brand-lockup"><span class="symbol">✺</span><strong>Faah.fun</strong><small>A LITTLE DIWALI SURPRISE</small></div></div>
-<audio id="faahSound" preload="auto" src="assets/diwali/fahhhhh.mp3"></audio>
+<audio id="faahSound" preload="none" data-src="assets/diwali/fahhhhh.mp3"></audio>
 
 <section class="scene" id="welcome" aria-label="Swagatam welcome screen">
  <svg class="bunting" viewBox="0 0 1000 210" preserveAspectRatio="none" aria-hidden="true">
@@ -267,7 +293,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}
   </svg>
   <span class="ornament-hint">TAP FOR SPARK</span>
  </button>
- <div id="finalWish"><div class="final-label">A wish made especially for you</div><h2 id="closingName">Someone Special</h2><p id="closingWish">May your home glow with happiness, your heart sparkle with hope, and your days be filled with laughter and love. Wishing you and your family a beautiful Diwali!</p><div class="signature">Shubho Dipaboli</div><div class="share-actions"><button class="action primary" id="shareBtn">Share greeting ↗</button><button class="action" id="copyBtn">Copy share link</button><button class="action" id="downloadBtn">Download personalized page</button><button class="action" id="replayBtn">Replay ✦</button></div><p id="status" aria-live="polite"></p></div>
+ <div id="finalWish"><div class="final-label">A wish made especially for you</div><h2 id="closingName">Someone Special</h2><p id="closingWish">May your home glow with happiness, your heart sparkle with hope, and your days be filled with laughter and love. Wishing you and your family a beautiful Diwali!</p><div class="signature">Shubho Dipaboli</div><div class="share-actions"><button class="action primary" id="shareBtn">Share greeting ↗</button><button class="action" id="whatsappBtn">WhatsApp</button><button class="action" id="copyBtn">Copy link</button><button class="action" id="qrBtn">QR code</button><button class="action" id="downloadImageBtn">Download card</button><button class="action" id="installBtn" hidden>Install app</button><button class="action" id="downloadBtn">Download page</button><button class="action" id="replayBtn">Replay ✦</button></div><div id="qrPanel" class="qr-panel hidden"><div id="qrCode"></div><span>Scan to open this greeting</span></div><p id="status" aria-live="polite"></p></div>
 </section>
 
 <script>
@@ -377,6 +403,32 @@ button,input,textarea{font:inherit}button{cursor:pointer}
  $("shareBtn").addEventListener("click",async()=>{if(location.protocol==="file:"){status("To share a link, host this HTML on GitHub Pages or Netlify first.");return}const url=shareLink(),payload={title:"Shubho Dipaboli — "+data.name,text:data.wish,url};try{if(navigator.share)await navigator.share(payload);else if(await copy(url))status("Share link copied!");else status("Copy this link: "+url)}catch(e){if(e.name!=="AbortError")status("Sharing is unavailable here. Use Copy share link.")}});
  $("downloadBtn").addEventListener("click",()=>{let html="<!doctype html>\n"+document.documentElement.outerHTML;const a=html.indexOf("<!-- PERSONALIZATION_CONFIG_START -->"),b=html.indexOf("<!-- PERSONALIZATION_CONFIG_END -->");if(a<0||b<0){status("Could not prepare the personalized page.");return}const end=b+"<!-- PERSONALIZATION_CONFIG_END -->".length;const json=JSON.stringify(data).replace(/</g,"\\u003c");const block='<!-- PERSONALIZATION_CONFIG_START -->\n<script>window.PERSONALIZATION='+json+';</scr'+'ipt>\n<!-- PERSONALIZATION_CONFIG_END -->';html=html.slice(0,a)+block+html.slice(end);const blob=new Blob([html],{type:"text/html;charset=utf-8"}),url=URL.createObjectURL(blob),link=document.createElement("a"),slug=(data.name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,30)||"diwali");link.href=url;link.download="shubho-dipaboli-"+slug+".html";document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);status("Personalized HTML downloaded with your photo embedded.")});
   $("replayBtn").addEventListener("click",()=>{const revealVideo=$("revealVideo"),sound=$("faahSound");revealVideo.pause();revealVideo.currentTime=0;revealVideo.controls=false;$("revealVideoFallback").classList.add("hidden");sound.pause();sound.currentTime=0;sound.onended=null;opened=false;popped=false;logoTransitionStarted=false;clearTimeout(logoFallbackTimer);$("finalWish").classList.remove("show");$("ornamentBtn").classList.remove("popped");$("welcome").classList.remove("hanuman-mode");$("photoShow").classList.remove("active");$("welcome").classList.remove("active");$("opening").classList.remove("leave","curtain-open");$("openingUI").classList.remove("dismiss");$("brand").classList.remove("show");particles=[];ctx.clearRect(0,0,innerWidth,innerHeight);status("")});
+})();
+</script>
+<script>
+(()=>{const $=id=>document.getElementById(id),reduced=matchMedia("(prefers-reduced-motion:reduce)").matches;let step=0,opened=false,ambientDots=[],ambientCtx=null,ambientRaf=0,particles=[],sparkRaf=0,taps=0,tapTimer=0,audioCtx=null,logoDone=false,logoTimer=0,installPrompt=null;
+const name=()=>$("nameInput").value.trim()||"Someone Special",wish=()=>$("wishInput").value.trim()||"Wishing you a joyful Diwali!",photo=()=>$("recipientPhoto").src.startsWith("data:")?$("recipientPhoto").src:"";
+function showStep(n){step=Math.max(0,Math.min(3,n));document.querySelectorAll(".form-step").forEach(e=>e.classList.toggle("active",+e.dataset.step===step));document.querySelectorAll("[data-step-dot]").forEach(e=>+e.dataset.stepDot===step?e.setAttribute("aria-current","step"):e.removeAttribute("aria-current"));$("backStep").disabled=step===0;$("nextStep").textContent=step===3?"Play surprise ✨":"Continue →"}
+function lazyMedia(){let v=$("revealVideo"),a=$("faahSound");if(!v.src){v.src=v.dataset.src;v.load()}if(!a.src){a.src=a.dataset.src;a.load()}}
+function openCurtain(){if(opened)return;opened=true;lazyMedia();$("opening").classList.add("curtain-open","personalizing");$("openingUI").classList.add("personalizing");showStep(0)}
+function startVideo(){let v=$("revealVideo");$("opening").classList.add("leave");$("photoShow").classList.add("active");$("videoLoader").classList.remove("hidden");v.pause();try{v.currentTime=0}catch(e){}let p=v.play();if(p&&p.then)p.then(()=>$("videoLoader").classList.add("hidden")).catch(()=>{$("videoLoader").classList.add("hidden");$("revealVideoFallback").classList.remove("hidden");$("revealVideoFallback").textContent="Tap here to play the surprise with sound";$("revealVideoFallback").onclick=()=>v.play().then(()=>$("revealVideoFallback").classList.add("hidden"))})}
+function finishVideo(){if(logoDone)return;logoDone=true;let v=$("revealVideo"),a=$("faahSound");v.pause();$("photoShow").classList.add("ending");$("brand").classList.add("show");let done=false,go=()=>{if(done)return;done=true;clearTimeout(logoTimer);$("photoShow").classList.remove("active","ending");$("welcome").classList.add("active");$("brand").classList.remove("show");setTimeout(()=>$("finalWish").classList.add("show"),3500)};a.currentTime=0;a.onended=go;let p=a.play();logoTimer=setTimeout(go,5000);if(p&&p.catch)p.catch(()=>setTimeout(go,1200))}
+function parallax(x,y){if(reduced)return;for(let [k,v] of [["--curtain-x",x],["--curtain-y",y],["--welcome-x",x],["--welcome-y",y]])document.documentElement.style.setProperty(k,v.toFixed(2))}
+if(!reduced){addEventListener("pointermove",e=>parallax((e.clientX/innerWidth-.5)*12,(e.clientY/innerHeight-.5)*10),{passive:true});addEventListener("deviceorientation",e=>{if(typeof e.gamma==="number")parallax(Math.max(-10,Math.min(10,e.gamma)),Math.max(-8,Math.min(8,e.beta||0)))},{passive:true})}
+function ambient(){if(reduced)return;ambientCtx.clearRect(0,0,innerWidth,innerHeight);ambientDots.forEach(p=>{p.y-=p.s;p.x+=Math.sin(p.p+=.006)*.12;if(p.y<0){p.y=innerHeight;p.x=Math.random()*innerWidth}ambientCtx.globalAlpha=p.a*(.7+.3*Math.sin(p.p));ambientCtx.fillStyle="#ffd98a";ambientCtx.shadowBlur=8;ambientCtx.shadowColor="#ffb94c";ambientCtx.beginPath();ambientCtx.arc(p.x,p.y,p.r,0,Math.PI*2);ambientCtx.fill()});ambientCtx.globalAlpha=1;ambientCtx.shadowBlur=0;ambientRaf=requestAnimationFrame(ambient)}
+let ac=$("ambientCanvas");ambientCtx=ac.getContext("2d");function resize(){let d=Math.min(devicePixelRatio||1,2);[ac,$("fireworkCanvas")].forEach(c=>{c.width=innerWidth*d;c.height=innerHeight*d;c.style.width=innerWidth+"px";c.style.height=innerHeight+"px";c.getContext("2d").setTransform(d,0,0,d,0,0)})}resize();addEventListener("resize",resize);ambientDots=Array.from({length:32},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:.5+Math.random()*1.7,s:.08+Math.random()*.24,a:.12+Math.random()*.25,p:Math.random()*6}));if(!reduced)ambientRaf=requestAnimationFrame(ambient);
+const fc=$("fireworkCanvas"),cx=fc.getContext("2d");function burst(x,y,n=210,power=1){for(let i=0;i<n;i++){let a=Math.random()*Math.PI*2,v=(1+Math.random()*7)*power;particles.push({x,y,ox:x,oy:y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,l:60+Math.random()*50,m:110,r:1+Math.random()*3,c:["#fff0b0","#ffd05b","#ff8c3c","#ed5146","#fff8dc","#e99ab0","#9ee8c0"][i%7]})}if(!sparkRaf)sparkRaf=requestAnimationFrame(drawSpark)}
+function drawSpark(){cx.clearRect(0,0,innerWidth,innerHeight);particles=particles.filter(p=>p.l>0);particles.forEach(p=>{p.ox=p.x;p.oy=p.y;p.x+=p.vx;p.y+=p.vy;p.vy+=.035;p.vx*=.986;p.l--;cx.globalAlpha=p.l/p.m;cx.strokeStyle=p.c;cx.shadowBlur=14;cx.shadowColor=p.c;cx.lineWidth=p.r;cx.beginPath();cx.moveTo(p.ox,p.oy);cx.lineTo(p.x,p.y);cx.stroke()});cx.globalAlpha=1;cx.shadowBlur=0;if(particles.length)sparkRaf=requestAnimationFrame(drawSpark);else sparkRaf=0}
+function sound(level){try{let AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;if(!audioCtx)audioCtx=new AC();if(audioCtx.state==="suspended")audioCtx.resume();let t=audioCtx.currentTime,o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type="sawtooth";o.frequency.setValueAtTime(420+level*60,t);o.frequency.exponentialRampToValueAtTime(65,t+.42);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(Math.min(.28,.12+level*.035),t+.025);g.gain.exponentialRampToValueAtTime(.0001,t+.48);o.connect(g);g.connect(audioCtx.destination);o.start(t);o.stop(t+.5)}catch(e){}}
+function spark(){taps=Math.min(5,taps+1);clearTimeout(tapTimer);tapTimer=setTimeout(()=>taps=0,1700);if(navigator.vibrate)navigator.vibrate(24);let r=$("ornamentBtn").getBoundingClientRect();sound(taps);burst(r.left+r.width/2,r.top+r.height/2,220+taps*40,1+taps*.13);setTimeout(()=>burst(r.left+r.width/2-65,r.top+r.height/2-35,80,1.2),100);$("welcome").classList.add("hanuman-mode");setTimeout(()=>$("welcome").classList.remove("hanuman-mode"),3600);setTimeout(()=>$("finalWish").classList.add("show"),500)}
+function shareUrl(){let u=new URL(location.href);u.searchParams.set("name",name());u.searchParams.set("wish",wish());return u.toString()}
+async function shareImage(){let c=document.createElement("canvas");c.width=1200;c.height=630;let g=c.getContext("2d"),gr=g.createLinearGradient(0,0,1200,630);gr.addColorStop(0,"#07060b");gr.addColorStop(.55,"#52131e");gr.addColorStop(1,"#e05a2c");g.fillStyle=gr;g.fillRect(0,0,1200,630);g.fillStyle="#f5c96d";g.font="700 24px system-ui";g.fillText("A LITTLE DIWALI SURPRISE",80,90);g.fillStyle="#ffe4a2";g.font="700 76px Georgia,serif";g.fillText("स्वागतम्",80,210);g.font="600 48px Georgia,serif";g.fillText(name().slice(0,24),80,290);g.fillStyle="#fff0d8";g.font="28px Georgia,serif";g.fillText(wish().slice(0,65),80,370);g.fillStyle="#ffe0a0";g.font="700 24px system-ui";g.fillText("FAAH.FUN",80,575);let p=photo();if(p){try{let im=await createImageBitmap(await(await fetch(p)).blob());g.drawImage(im,850,145,260,300)}catch(e){}}return new Promise(r=>c.toBlob(r,"image/png"))}
+async function copyText(t){if(navigator.clipboard&&isSecureContext){await navigator.clipboard.writeText(t);return true}return false}
+document.addEventListener("click",e=>{let t=e.target.closest("button");if(!t)return;if(t.id==="openBtn"){e.stopImmediatePropagation();openCurtain()}else if(t.id==="nextStep"){e.stopImmediatePropagation();if(step===0&&!name())return;if(step<3)showStep(step+1);else startVideo()}else if(t.id==="backStep"){e.stopImmediatePropagation();showStep(step-1)}else if(t.dataset.stepDot!==undefined){e.stopImmediatePropagation();showStep(+t.dataset.stepDot)}else if(t.id==="ornamentBtn"){e.stopImmediatePropagation();spark()}else if(t.id==="shareBtn"){e.stopImmediatePropagation();(async()=>{let u=shareUrl(),blob=await shareImage(),file=blob&&new File([blob],"diwali-greeting.png",{type:"image/png"}),payload={title:"Shubho Dipaboli — "+name(),text:wish()+" ✨",url:u};try{if(file&&navigator.canShare&&navigator.canShare({files:[file]}))await navigator.share({...payload,files:[file]});else if(navigator.share)await navigator.share(payload);else if(await copyText(u))$("status").textContent="Personalized link copied."}catch(err){if(err.name!=="AbortError")$("status").textContent="Use WhatsApp or Copy link below."}})()}else if(t.id==="whatsappBtn"){e.stopImmediatePropagation();open("https://wa.me/?text="+encodeURIComponent("✨ "+name()+", a little Diwali surprise is waiting for you! "+shareUrl()),"_blank","noopener")}else if(t.id==="copyBtn"){e.stopImmediatePropagation();copyText(shareUrl()).then(ok=>$("status").textContent=ok?"Personalized link copied.":shareUrl())}else if(t.id==="qrBtn"){e.stopImmediatePropagation();let p=$("qrPanel");p.classList.toggle("hidden");if(!p.classList.contains("hidden")){let im=document.createElement("img");im.alt="QR code";im.src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data="+encodeURIComponent(shareUrl());$("qrCode").replaceChildren(im)}}else if(t.id==="downloadImageBtn"){e.stopImmediatePropagation();shareImage().then(b=>{let u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="diwali-greeting.png";a.click();URL.revokeObjectURL(u)})}else if(t.id==="replayBtn"){e.stopImmediatePropagation();let v=$("revealVideo"),a=$("faahSound");v.pause();try{v.currentTime=0}catch(err){}a.pause();a.currentTime=0;opened=false;logoDone=false;clearTimeout(logoTimer);$("finalWish").classList.remove("show");$("photoShow").classList.remove("active","ending");$("welcome").classList.remove("active","hanuman-mode");$("opening").classList.remove("leave","curtain-open","personalizing");$("openingUI").classList.remove("personalizing");$("brand").classList.remove("show");$("qrPanel").classList.add("hidden");showStep(0);particles=[];cx.clearRect(0,0,innerWidth,innerHeight)}},true);
+document.addEventListener("ended",e=>{if(e.target.id==="revealVideo"){e.stopImmediatePropagation();finishVideo()}},true);
+$("nameInput").addEventListener("input",()=>{$("previewName").textContent=name()});$("photoInput").addEventListener("change",()=>setTimeout(()=>{let p=photo();if(p){$("previewPhoto").src=p;$("previewPhoto").classList.remove("hidden")}},80));
+addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e;$("installBtn").hidden=false});$("installBtn").addEventListener("click",async()=>{if(installPrompt){installPrompt.prompt();await installPrompt.userChoice;installPrompt=null}});
+if("serviceWorker"in navigator&&location.protocol!=="file:")addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
 })();
 </script>
 </body>
