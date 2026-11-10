@@ -1,4 +1,4 @@
-const CACHE_NAME="diwali-masti-shell-v4";
+const CACHE_NAME="diwali-masti-shell-v5";
 const SHELL=["./","./index.html","./manifest.webmanifest","./assets/diwali/app-icon.svg","./assets/diwali/og-preview.svg","./assets/diwali/hanuman-from-reference.svg"];
 self.addEventListener("install",event=>{event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(SHELL)).then(()=>self.skipWaiting()))});
 self.addEventListener("activate",event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE_NAME).map(key=>caches.delete(key)))).then(()=>self.clients.claim()))});
