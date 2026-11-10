@@ -1,0 +1,16 @@
+{
+  "id": "./",
+  "name": "Shubho Dipaboli — Faah.fun",
+  "short_name": "Diwali Masti",
+  "description": "A personalized, cinematic Diwali surprise.",
+  "start_url": "./?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#09060c",
+  "theme_color": "#270710",
+  "categories": ["entertainment", "lifestyle"],
+  "icons": [
+    {"src":"./assets/diwali/app-icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
