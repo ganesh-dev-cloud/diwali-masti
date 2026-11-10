@@ -196,6 +196,16 @@ button,input,textarea{font:inherit}button{cursor:pointer}
  display:none!important;visibility:hidden!important;pointer-events:none!important
 }
 
+
+/* The opening screen is intentionally OPEN-only: no editor or wizard panel. */
+#openingUI .editor,#openingUI .editor *,
+#personalizeDetails,.editor,.editor-inner,
+.personalize-modal,.personalization-modal,.personalize-wizard,.personalization-wizard,
+.wizard-overlay,.wizard-modal,.stepper-form,.step-indicator,.live-preview-panel,
+#personalizeModal,#personalizationModal,#personalizeWizard,#personalizationWizard{
+ display:none!important;visibility:hidden!important;pointer-events:none!important
+}
+
 </style>
 </head>
 <body>
@@ -214,11 +224,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}
   <div class="eyebrow">A little Diwali surprise</div>
   <div class="speech" id="teaser">Psst... something special is waiting behind the curtains. ✨</div>
   <button class="open-button" id="openBtn">OPEN</button>
-  <div class="editor"><details id="personalizeDetails"><summary>✦ Personalize your greeting</summary><div class="editor-inner">
-   <div class="field"><label for="nameInput">Recipient name</label><input id="nameInput" type="text" maxlength="48" value="Someone Special"></div>
-   <div class="field"><label for="photoInput">Recipient photo (optional)</label><input id="photoInput" type="file" accept="image/*"><span class="editor-note">Your photo stays in this browser. Download the personalized HTML to include it in the shareable file.</span></div>
-   <div class="field"><label for="wishInput">Personal wish</label><textarea id="wishInput" maxlength="420">May your home glow with happiness, your heart sparkle with hope, and your days be filled with laughter and love. Wishing you and your family a beautiful Diwali!</textarea></div>
-  </div></details></div>
+  <!-- Personalization editor removed: keep the original OPEN-only curtain screen. -->
  </div>
  <div class="curtain-layer" id="curtainLayer" aria-hidden="true"><div class="curtain-panel left"></div><div class="curtain-panel right"></div><div class="curtain-valance"></div></div>
 </section>
@@ -413,6 +419,29 @@ button,input,textarea{font:inherit}button{cursor:pointer}
  }
  removeLegacyPersonalizeWizard();
  document.addEventListener("DOMContentLoaded",removeLegacyPersonalizeWizard,{once:true});
+
+ // Remove any stale/late-injected multi-step personalization card without
+ // affecting the OPEN button or the original curtain/photo reveal.
+ (function(){
+  const signature=/Who is this surprise for\?/i;
+  function cleanWizard(){
+   for(const el of document.querySelectorAll("body *")){
+    if(el.children.length>10)continue;
+    const t=(el.innerText||"").replace(/\s+/g," ");
+    if(!signature.test(t)||!/1\s*Name/i.test(t)||!/2\s*Photo/i.test(t)||!/3\s*Wish/i.test(t)||!/4\s*Preview/i.test(t))continue;
+    let box=el;
+    for(let n=0;n<5&&box.parentElement;n++){
+     const r=box.getBoundingClientRect();
+     if(r.width>innerWidth*.55&&r.height>150){box.style.setProperty("display","none","important");box.setAttribute("aria-hidden","true");break;}
+     box=box.parentElement;
+    }
+   }
+  }
+  cleanWizard();
+  const observer=new MutationObserver(cleanWizard);
+  observer.observe(document.body,{childList:true,subtree:true});
+  document.addEventListener("DOMContentLoaded",cleanWizard,{once:true});
+ })();
 </script>
 </body>
 </html>
