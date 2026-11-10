@@ -244,19 +244,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 </svg>
  <div class="sun" aria-hidden="true"></div>
  <!-- Original inline silhouette illustration -->
- <svg class="hanuman" viewBox="0 0 400 440" role="img" aria-label="Original Hanuman silhouette">
-  <g fill="#160b12" stroke="#160b12" stroke-linejoin="round" stroke-linecap="round">
-   <path d="M225 255 C330 218 378 298 331 345 C300 375 253 352 270 324 C282 306 307 318 298 333" fill="none" stroke-width="17"/>
-   <path d="M142 292 Q122 335 99 386 L64 410 Q48 427 72 430 L137 419 Q151 405 159 363 L193 326 L218 386 L196 412 Q187 431 215 431 L274 419 Q286 407 260 390 L255 328 L226 278Z"/>
-   <path d="M123 139 Q94 153 91 191 L113 283 Q151 317 240 294 Q271 265 249 184 L221 143 Q171 116 123 139Z"/>
-   <path d="M104 168 Q171 211 254 158 L272 193 Q187 245 120 207Z"/>
-   <path d="M111 161 Q72 183 59 230 L79 248 Q116 219 143 190Z"/><path d="M239 160 Q287 155 301 204 L281 220 Q252 199 226 188Z"/>
-   <circle cx="180" cy="98" r="47"/><path d="M151 110 Q180 143 211 110 Q207 151 179 155 Q150 148 151 110Z"/>
-   <path d="M130 66 L139 23 L160 43 L181 4 L201 43 L226 22 L235 72 Q183 56 130 72Z"/>
-   <path d="M304 91 L318 96 L284 304 L271 300Z"/><path d="M286 79 Q318 48 349 78 L355 96 Q321 126 286 103Z"/>
-  </g><g fill="#f0c16b"><circle cx="165" cy="97" r="4"/><circle cx="194" cy="97" r="4"/><circle cx="179" cy="131" r="4"/></g>
-  <path d="M124 234 Q181 263 253 224" fill="none" stroke="#b46e37" stroke-width="5" opacity=".55"/>
- </svg>
+ <img class="hanuman" src="assets/diwali/hanuman-from-reference.svg" alt="Hanuman holding a gada, from the supplied Diwali artwork">
  <svg class="skyline" viewBox="0 0 1000 190" preserveAspectRatio="none" aria-hidden="true">
   <path d="M0 145h48v-42h28V80h18v65h44v-30h28V83h22v62h33v-42h28v42h28v-76h13V54h9v15h12v76h37v-34h38v34h32V88h26v57h36v-26h23V80h15v-18h9v18h13v52h34v-25h36v25h28V83h18V60h9v23h15v62h43v-33h27v33h40v-56h22v-18h12v18h15v56h41v-43h26v43h49v-67h24v67h32v45H0Z" fill="#170b12"/><path d="M0 169h1000v21H0Z" fill="#0a080b"/>
   <g fill="#f6bd62"><circle cx="75" cy="138" r="3"/><circle cx="287" cy="128" r="3"/><circle cx="515" cy="134" r="3"/><circle cx="737" cy="136" r="3"/><circle cx="927" cy="142" r="3"/></g>
@@ -361,11 +349,16 @@ button,input,textarea{font:inherit}button{cursor:pointer}
  function openReveal(){
   if(opened)return;opened=true;
   const revealVideo=$("revealVideo");
-  revealVideo.pause();revealVideo.currentTime=0;revealVideo.muted=false;revealVideo.defaultMuted=false;revealVideo.volume=1;
+  // Begin muted inside the OPEN gesture to unlock playback on mobile browsers.
+  // Restart from frame zero and unmute when the curtain has fully opened.
+  revealVideo.pause();revealVideo.currentTime=0;revealVideo.muted=true;revealVideo.defaultMuted=true;revealVideo.volume=1;
   const playPromise=revealVideo.play();
-  if(playPromise&&playPromise.catch)playPromise.catch(()=>{$("revealVideoFallback").classList.remove("hidden");revealVideo.controls=true;status("Tap the video inside the frame to start playback with sound.")});
+  if(playPromise&&playPromise.catch)playPromise.catch(()=>{$("revealVideoFallback").classList.remove("hidden");revealVideo.controls=true;status("Tap the video inside the golden frame to start playback.")});
   $("opening").classList.add("curtain-open");$("openingUI").classList.add("dismiss");
-  setTimeout(()=>{$("opening").classList.add("leave");$("photoShow").classList.add("active");startPhotoShow()},1550);
+  setTimeout(()=>{
+   revealVideo.currentTime=0;revealVideo.muted=false;revealVideo.defaultMuted=false;
+   $("opening").classList.add("leave");$("photoShow").classList.add("active");startPhotoShow();
+  },1550);
  }
  $("openBtn").addEventListener("click",openReveal);
  function popOrnament(){
