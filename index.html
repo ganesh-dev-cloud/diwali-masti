@@ -128,6 +128,65 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 @media(max-width:650px){#opening{padding:18px 14px}.opening-ui{padding-top:34px}.editor{margin-top:21px}.photo-reveal{width:min(74vw,340px)}#welcome{padding:90px 14px 125px}.skyline{height:145px}.hanging-ornament{right:4%;top:41%;width:92px;height:126px}.showcase-card{width:min(82vw,430px)}.showcase-caption{font-size:.9rem}#finalWish{padding:18px 16px}}
 @media(max-height:720px){.opening-ui{padding-top:8px}.editor{margin-top:10px}.photo-reveal{width:min(52vw,270px)}#welcome{padding-top:72px;padding-bottom:105px}.welcome-main{margin-top:0}.welcome-heading{margin:8px 0}.hanging-ornament{top:35%}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* Reference-video layout: dark Faah.fun Diwali night scene */
+#opening{background:radial-gradient(ellipse at 50% 70%,#3a0b17 0%,#17070e 48%,#030306 100%)}
+.opening-ui{padding-top:10px}
+.opening-ui .eyebrow{display:none}
+.speech{margin:0 auto 24px;background:#fff7e8;color:#7d1524;border-radius:22px;padding:10px 18px;box-shadow:0 4px 0 #a76a3b,0 12px 30px #0008;font-size:clamp(.86rem,3.5vw,1rem)}
+.open-button{min-width:132px;padding:12px 28px;border-radius:9px;letter-spacing:.12em}
+.editor{display:none}
+#photoShow{background:radial-gradient(ellipse at 50% 55%,#21121b 0%,#050508 58%,#000 100%)}
+.showcase-card{width:min(64vw,340px);aspect-ratio:4/5;border-radius:5px}
+.showcase-photo{background:#08070b}
+#revealVideo{object-fit:contain}
+#brand{background:#020204}
+#brand .brand-lockup strong{font-weight:700;letter-spacing:.04em}
+#welcome{align-items:stretch;padding:0;background:
+ radial-gradient(ellipse at 0% 83%,#8c251d 0%,#54151a 20%,transparent 48%),
+ linear-gradient(180deg,#020306 0%,#05060a 56%,#17080d 100%)}
+#welcome:before{background:
+ radial-gradient(ellipse at 6% 77%,#a92c242e,transparent 48%),
+ linear-gradient(180deg,#01020400 0%,#05050800 58%,#17080d 100%)}
+#welcome:after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.48;
+ background-image:radial-gradient(circle,#fff5d8 0 1px,transparent 1.8px),radial-gradient(circle,#e8c77b 0 1px,transparent 1.8px);
+ background-size:97px 83px,151px 137px;background-position:12px 17px,57px 42px}
+.bunting{z-index:5;top:-8px;height:clamp(125px,24vh,210px);opacity:.96}
+.welcome-main{position:absolute;z-index:6;top:23%;left:7%;width:min(65vw,620px);margin:0;text-align:left}
+.welcome-main .eyebrow,.welcome-recipient,.welcome-line{display:none}
+.welcome-heading{margin:0;color:#ffe6a5;font-size:clamp(3rem,9.5vw,6.8rem);line-height:1;text-shadow:0 2px 0 #8c571f,0 8px 25px #f6b84955}
+.welcome-heading .hindi{font-size:inherit;letter-spacing:.015em;white-space:nowrap}
+.welcome-heading .hindi:after{content:"";display:block;width:54%;height:24px;margin:-1px 0 0 29%;border-bottom:5px solid #e5a63d;border-radius:0 0 80% 80%;transform:rotate(-9deg);opacity:.95}
+.sun{z-index:2;left:50%;bottom:8%;width:min(78vw,520px);opacity:0;display:block;transition:opacity .7s ease}
+.hanuman{z-index:4;left:50%;bottom:0;width:min(70vw,420px);opacity:0;display:block;transform:translateX(-50%) scale(.82);transition:opacity .7s ease}
+.skyline{z-index:3;height:clamp(105px,18vh,175px)}
+.hanging-ornament{z-index:7;right:13%;top:38%;width:clamp(55px,8vw,82px);height:clamp(118px,20vh,160px)}
+.ornament-hint{display:none}
+.hanging-ornament svg{filter:drop-shadow(0 0 10px #24b58a44)}
+.hanging-ornament:before{content:"";position:absolute;top:24px;left:50%;width:5px;height:5px;border-radius:50%;background:#fff1a5;box-shadow:0 0 12px 5px #ffd36d;opacity:0;transition:opacity .2s}
+.hanging-ornament:active:before{opacity:1}
+.hanging-ornament.popped{animation:ornamentSwing 4s ease-in-out infinite alternate;opacity:1;transform:none}
+#welcome.hanuman-mode{background:
+ radial-gradient(ellipse at 50% 62%,#ff8c2d 0%,#c33a25 27%,#50131b 58%,#030306 82%),
+ #030306}
+#welcome.hanuman-mode .sun{opacity:1;animation:sunBloom 3.6s ease both}
+#welcome.hanuman-mode .hanuman{opacity:1;transform:translateX(-50%) scale(1);animation:hanumanIdle 3.6s ease-in-out both}
+#welcome.hanuman-mode .welcome-main{opacity:.08;transition:opacity .5s}
+#welcome.hanuman-mode .hanging-ornament{opacity:.15;transition:opacity .5s}
+@keyframes sunBloom{from{transform:translateX(-50%) scale(.45);filter:brightness(.5)}to{transform:translateX(-50%) scale(1);filter:brightness(1)}}
+@media(max-width:650px){
+ .welcome-main{top:25%;left:6%;width:75vw}
+ .welcome-heading{font-size:clamp(2.8rem,12vw,4.4rem)}
+ .hanging-ornament{right:10%;top:39%;width:60px;height:130px}
+ .skyline{height:125px}
+ .showcase-card{width:min(68vw,320px)}
+}
+@media(max-height:650px){
+ .welcome-main{top:20%}
+ .hanging-ornament{top:34%;height:115px}
+ .skyline{height:100px}
+}
+
 </style>
 </head>
 <body>
@@ -168,12 +227,21 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 <audio id="faahSound" preload="auto" src="assets/diwali/fahhhhh.mp3"></audio>
 
 <section class="scene" id="welcome" aria-label="Swagatam welcome screen">
- <svg class="bunting" viewBox="0 0 1000 180" preserveAspectRatio="none" aria-hidden="true">
-  <path d="M-20 0 Q250 180 500 42 Q750 180 1020 0" fill="none" stroke="#150b12" stroke-width="7"/><path d="M-20 0 Q250 180 500 42 Q750 180 1020 0" fill="none" stroke="#e8bb70" stroke-width="2"/>
-  <g stroke="#e8bb70" stroke-width="2"><path d="M105 66v24 M228 113v24 M370 114v24 M500 42v26 M630 114v24 M772 113v24 M895 66v24"/></g>
-  <g><circle cx="105" cy="97" r="9" fill="#ffcc66"/><circle cx="228" cy="141" r="8" fill="#f16b54"/><circle cx="370" cy="141" r="8" fill="#55c4a4"/><circle cx="500" cy="78" r="10" fill="#ffe39b"/><circle cx="630" cy="141" r="8" fill="#e982a0"/><circle cx="772" cy="141" r="8" fill="#64bfc9"/><circle cx="895" cy="97" r="9" fill="#ffd36d"/></g>
-  <g fill="#de9a48" stroke="#ffe5a2" stroke-width="2"><path d="M165 105q20 18 0 39q-20-21 0-39 M835 104q20 18 0 39q-20-21 0-39"/></g>
- </svg>
+ <svg class="bunting" viewBox="0 0 1000 210" preserveAspectRatio="none" aria-hidden="true">
+ <defs><filter id="bulbGlow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+ <g fill="none" stroke="#6d4b36" stroke-width="4" opacity=".9">
+  <path d="M-20 0 Q220 210 500 55 Q760 220 1020 0"/>
+  <path d="M80 -12 Q280 170 510 34 Q760 182 940 -12"/>
+  <path d="M-20 42 Q220 220 500 84 Q760 225 1020 42"/>
+ </g>
+ <g filter="url(#bulbGlow)">
+  <g fill="#ff3d54"><circle cx="65" cy="68" r="7"/><circle cx="385" cy="108" r="7"/><circle cx="770" cy="117" r="7"/></g>
+  <g fill="#31d5b2"><circle cx="145" cy="112" r="7"/><circle cx="470" cy="67" r="7"/><circle cx="860" cy="79" r="7"/></g>
+  <g fill="#438dff"><circle cx="225" cy="146" r="7"/><circle cx="565" cy="87" r="7"/><circle cx="940" cy="35" r="7"/></g>
+  <g fill="#ffcc4e"><circle cx="305" cy="145" r="7"/><circle cx="650" cy="125" r="7"/><circle cx="710" cy="152" r="7"/></g>
+  <g fill="#d96bff"><circle cx="30" cy="35" r="7"/><circle cx="520" cy="142" r="7"/><circle cx="900" cy="125" r="7"/></g>
+ </g>
+</svg>
  <div class="sun" aria-hidden="true"></div>
  <!-- Original inline silhouette illustration -->
  <svg class="hanuman" viewBox="0 0 400 440" role="img" aria-label="Original Hanuman silhouette">
@@ -229,7 +297,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}
  function status(t){$("status").textContent=t}
  function render(){
   $("welcomeName").textContent=data.name;$("closingName").textContent=data.name;$("closingWish").textContent=data.wish;
-  $("teaser").textContent="Wait for the surprise, "+data.name+"! ✨";
+  $("teaser").textContent=data.name+"! A little surprise is waiting for you. ✨";
   $("photoCaption").textContent="A little surprise for "+data.name;$("photoInitial").textContent=(data.name.trim()[0]||"✦").toUpperCase();
   $("showcaseCaption").textContent="A little surprise for "+data.name;
   // The reveal scene now plays video inside the golden frame. The old
@@ -303,10 +371,11 @@ button,input,textarea{font:inherit}button{cursor:pointer}
  function popOrnament(){
   if(popped)return;popped=true;
   const r=$("ornamentBtn").getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;
-  burst(x,y,160);
+  fireworkSound();burst(x,y,160);
   setTimeout(()=>burst(x-65,y-25,65),130);
   setTimeout(()=>burst(x+65,y+25,65),260);
-  $("ornamentBtn").classList.add("popped");
+  $("welcome").classList.add("hanuman-mode");
+  setTimeout(()=>{$("welcome").classList.remove("hanuman-mode");popped=false},3900);
  }
  $("ornamentBtn").addEventListener("click",popOrnament);
  function shareLink(){const u=new URL(location.href);u.searchParams.set("name",data.name);u.searchParams.set("wish",data.wish);return u.toString()}
@@ -314,7 +383,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}
  $("copyBtn").addEventListener("click",async()=>{if(location.protocol==="file:"){status("Host this HTML on GitHub Pages or Netlify first to create a public link.");return}const u=shareLink();if(await copy(u))status("Personalized link copied. It includes the name and wish; export the HTML to include the photo.");else status("Copy this link: "+u)});
  $("shareBtn").addEventListener("click",async()=>{if(location.protocol==="file:"){status("To share a link, host this HTML on GitHub Pages or Netlify first.");return}const url=shareLink(),payload={title:"Shubho Dipaboli — "+data.name,text:data.wish,url};try{if(navigator.share)await navigator.share(payload);else if(await copy(url))status("Share link copied!");else status("Copy this link: "+url)}catch(e){if(e.name!=="AbortError")status("Sharing is unavailable here. Use Copy share link.")}});
  $("downloadBtn").addEventListener("click",()=>{let html="<!doctype html>\n"+document.documentElement.outerHTML;const a=html.indexOf("<!-- PERSONALIZATION_CONFIG_START -->"),b=html.indexOf("<!-- PERSONALIZATION_CONFIG_END -->");if(a<0||b<0){status("Could not prepare the personalized page.");return}const end=b+"<!-- PERSONALIZATION_CONFIG_END -->".length;const json=JSON.stringify(data).replace(/</g,"\\u003c");const block='<!-- PERSONALIZATION_CONFIG_START -->\n<script>window.PERSONALIZATION='+json+';</scr'+'ipt>\n<!-- PERSONALIZATION_CONFIG_END -->';html=html.slice(0,a)+block+html.slice(end);const blob=new Blob([html],{type:"text/html;charset=utf-8"}),url=URL.createObjectURL(blob),link=document.createElement("a"),slug=(data.name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,30)||"diwali");link.href=url;link.download="shubho-dipaboli-"+slug+".html";document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);status("Personalized HTML downloaded with your photo embedded.")});
-  $("replayBtn").addEventListener("click",()=>{const revealVideo=$("revealVideo"),sound=$("faahSound");revealVideo.pause();revealVideo.currentTime=0;revealVideo.controls=false;$("revealVideoFallback").classList.add("hidden");sound.pause();sound.currentTime=0;sound.onended=null;opened=false;popped=false;logoTransitionStarted=false;clearTimeout(logoFallbackTimer);$("finalWish").classList.remove("show");$("ornamentBtn").classList.remove("popped");$("photoShow").classList.remove("active");$("welcome").classList.remove("active");$("opening").classList.remove("leave","curtain-open");$("openingUI").classList.remove("dismiss");$("brand").classList.remove("show");particles=[];ctx.clearRect(0,0,innerWidth,innerHeight);status("")});
+  $("replayBtn").addEventListener("click",()=>{const revealVideo=$("revealVideo"),sound=$("faahSound");revealVideo.pause();revealVideo.currentTime=0;revealVideo.controls=false;$("revealVideoFallback").classList.add("hidden");sound.pause();sound.currentTime=0;sound.onended=null;opened=false;popped=false;logoTransitionStarted=false;clearTimeout(logoFallbackTimer);$("finalWish").classList.remove("show");$("ornamentBtn").classList.remove("popped");$("welcome").classList.remove("hanuman-mode");$("photoShow").classList.remove("active");$("welcome").classList.remove("active");$("opening").classList.remove("leave","curtain-open");$("openingUI").classList.remove("dismiss");$("brand").classList.remove("show");particles=[];ctx.clearRect(0,0,innerWidth,innerHeight);status("")});
 })();
 </script>
 </body>
