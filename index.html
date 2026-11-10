@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#270710">
+<meta name="theme-color" content="#270710"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="description" content="A cinematic, personalized Diwali surprise."><meta property="og:type" content="website"><meta property="og:title" content="Shubho Dipaboli · A little surprise"><meta property="og:description" content="Open the curtains for a little Diwali magic."><meta property="og:image" content="https://ganesh-dev-cloud.github.io/diwali-masti/assets/diwali/og-preview.svg"><meta name="twitter:card" content="summary_large_image"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./assets/diwali/app-icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="./assets/diwali/app-icon.svg">
 <title>Shubho Dipaboli · A little surprise</title>
 <style>
@@ -205,7 +205,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 
 .video-loader{position:absolute;z-index:4;inset:0;display:grid;place-content:center;gap:12px;text-align:center;background:linear-gradient(115deg,#100913,#3a1528,#100913);background-size:220% 100%;color:#ffe3a0;letter-spacing:.2em;font-size:.58rem;animation:loadingSheen .75s ease-in-out infinite}.video-loader span{width:50px;height:50px;margin:auto;border:1px solid #f4d18b;border-radius:50%;box-shadow:0 0 24px #f3c66b88;animation:loaderPulse .7s infinite alternate}.video-loader.hidden{display:none!important}@keyframes loadingSheen{to{background-position:-220% 0}}@keyframes loaderPulse{to{transform:scale(1.1);opacity:.45}}
 #photoShow.ending{opacity:0;transform:scale(1.02);transition:opacity .7s,transform .7s;pointer-events:none}
-#ambientCanvas{position:fixed;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;opacity:.6}
+#ambientCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;opacity:.6}
 .bunting{filter:drop-shadow(0 0 9px #ffca6733);animation:stringSway 7s ease-in-out infinite alternate,buntingPulse 3.2s ease-in-out infinite}@keyframes buntingPulse{50%{filter:drop-shadow(0 0 15px #ffca6780)}}
 .sun,.hanuman,.skyline,.bunting{translate:calc(var(--welcome-x,0)*.45px) calc(var(--welcome-y,0)*.45px)}
 .hanuman{filter:drop-shadow(0 0 15px #f5a13c44) drop-shadow(0 5px 8px #050207a8)}
@@ -218,7 +218,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 <!-- PERSONALIZATION_CONFIG_START -->
 <script>window.PERSONALIZATION={name:"Someone Special",wish:"May your home glow with happiness, your heart sparkle with hope, and your days be filled with laughter and love. Wishing you and your family a beautiful Diwali!",photo:""};</script>
 <!-- PERSONALIZATION_CONFIG_END -->
-<canvas id="ambientCanvas" aria-hidden="true"></canvas><canvas id="fireworkCanvas" aria-hidden="true"></canvas>
+<canvas id="fireworkCanvas" aria-hidden="true"></canvas>
 
 <section class="scene" id="opening" aria-label="Theatre curtain reveal">
  <div class="opening-glow"></div>
@@ -252,7 +252,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 <div id="brand" aria-hidden="true"><div class="brand-lockup"><span class="symbol">✺</span><strong>Faah.fun</strong><small>A LITTLE DIWALI SURPRISE</small></div></div>
 <audio id="faahSound" preload="none" data-src="assets/diwali/fahhhhh.mp3"></audio>
 
-<section class="scene" id="welcome" aria-label="Swagatam welcome screen">
+<section class="scene" id="welcome" aria-label="Swagatam welcome screen"><canvas id="ambientCanvas" aria-hidden="true"></canvas>
  <svg class="bunting" viewBox="0 0 1000 210" preserveAspectRatio="none" aria-hidden="true">
  <defs><filter id="bulbGlow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
  <g fill="none" stroke="#6d4b36" stroke-width="4" opacity=".9">
@@ -270,7 +270,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 </svg>
  <div class="sun" aria-hidden="true"></div>
  <!-- Original inline silhouette illustration -->
- <img class="hanuman" src="assets/diwali/hanuman-from-reference.svg" alt="Hanuman holding a gada, from the supplied Diwali artwork">
+ <img class="hanuman" src="assets/diwali/hanuman-parallax.webp" alt="Hanuman holding a gada, from the supplied Diwali artwork">
  <svg class="skyline" viewBox="0 0 1000 190" preserveAspectRatio="none" aria-hidden="true">
   <path d="M0 145h48v-42h28V80h18v65h44v-30h28V83h22v62h33v-42h28v42h28v-76h13V54h9v15h12v76h37v-34h38v34h32V88h26v57h36v-26h23V80h15v-18h9v18h13v52h34v-25h36v25h28V83h18V60h9v23h15v62h43v-33h27v33h40v-56h22v-18h12v18h15v56h41v-43h26v43h49v-67h24v67h32v45H0Z" fill="#170b12"/><path d="M0 169h1000v21H0Z" fill="#0a080b"/>
   <g fill="#f6bd62"><circle cx="75" cy="138" r="3"/><circle cx="287" cy="128" r="3"/><circle cx="515" cy="134" r="3"/><circle cx="737" cy="136" r="3"/><circle cx="927" cy="142" r="3"/></g>
@@ -426,7 +426,7 @@ async function shareImage(){let c=document.createElement("canvas");c.width=1200;
 async function copyText(t){if(navigator.clipboard&&isSecureContext){await navigator.clipboard.writeText(t);return true}return false}
 document.addEventListener("click",e=>{let t=e.target.closest("button");if(!t)return;if(t.id==="openBtn"){e.stopImmediatePropagation();openCurtain()}else if(t.id==="nextStep"){e.stopImmediatePropagation();if(step===0&&!name())return;if(step<3)showStep(step+1);else startVideo()}else if(t.id==="backStep"){e.stopImmediatePropagation();showStep(step-1)}else if(t.dataset.stepDot!==undefined){e.stopImmediatePropagation();showStep(+t.dataset.stepDot)}else if(t.id==="ornamentBtn"){e.stopImmediatePropagation();spark()}else if(t.id==="shareBtn"){e.stopImmediatePropagation();(async()=>{let u=shareUrl(),blob=await shareImage(),file=blob&&new File([blob],"diwali-greeting.png",{type:"image/png"}),payload={title:"Shubho Dipaboli — "+name(),text:wish()+" ✨",url:u};try{if(file&&navigator.canShare&&navigator.canShare({files:[file]}))await navigator.share({...payload,files:[file]});else if(navigator.share)await navigator.share(payload);else if(await copyText(u))$("status").textContent="Personalized link copied."}catch(err){if(err.name!=="AbortError")$("status").textContent="Use WhatsApp or Copy link below."}})()}else if(t.id==="whatsappBtn"){e.stopImmediatePropagation();open("https://wa.me/?text="+encodeURIComponent("✨ "+name()+", a little Diwali surprise is waiting for you! "+shareUrl()),"_blank","noopener")}else if(t.id==="copyBtn"){e.stopImmediatePropagation();copyText(shareUrl()).then(ok=>$("status").textContent=ok?"Personalized link copied.":shareUrl())}else if(t.id==="qrBtn"){e.stopImmediatePropagation();let p=$("qrPanel");p.classList.toggle("hidden");if(!p.classList.contains("hidden")){let im=document.createElement("img");im.alt="QR code";im.src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data="+encodeURIComponent(shareUrl());$("qrCode").replaceChildren(im)}}else if(t.id==="downloadImageBtn"){e.stopImmediatePropagation();shareImage().then(b=>{let u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="diwali-greeting.png";a.click();URL.revokeObjectURL(u)})}else if(t.id==="replayBtn"){e.stopImmediatePropagation();let v=$("revealVideo"),a=$("faahSound");v.pause();try{v.currentTime=0}catch(err){}a.pause();a.currentTime=0;opened=false;logoDone=false;clearTimeout(logoTimer);$("finalWish").classList.remove("show");$("photoShow").classList.remove("active","ending");$("welcome").classList.remove("active","hanuman-mode");$("opening").classList.remove("leave","curtain-open","personalizing");$("openingUI").classList.remove("personalizing");$("brand").classList.remove("show");$("qrPanel").classList.add("hidden");showStep(0);particles=[];cx.clearRect(0,0,innerWidth,innerHeight)}},true);
 document.addEventListener("ended",e=>{if(e.target.id==="revealVideo"){e.stopImmediatePropagation();finishVideo()}},true);
-$("nameInput").addEventListener("input",()=>{$("previewName").textContent=name()});$("photoInput").addEventListener("change",()=>setTimeout(()=>{let p=photo();if(p){$("previewPhoto").src=p;$("previewPhoto").classList.remove("hidden")}},80));
+$("nameInput").addEventListener("input",()=>{$("previewName").textContent=name()});$("recipientPhoto").addEventListener("load",()=>{if($("recipientPhoto").src.startsWith("data:")){$("previewPhoto").src=$("recipientPhoto").src;$("previewPhoto").classList.remove("hidden")}});$("nameInput").addEventListener("input",()=>$("previewName").textContent=$("nameInput").value.trim()||"Someone Special");
 addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e;$("installBtn").hidden=false});$("installBtn").addEventListener("click",async()=>{if(installPrompt){installPrompt.prompt();await installPrompt.userChoice;installPrompt=null}});
 if("serviceWorker"in navigator&&location.protocol!=="file:")addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
 })();
