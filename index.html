@@ -226,8 +226,8 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 <section id="photoShow" aria-label="Diwali surprise video playing inside the golden frame">
   <div class="showcase-sparkle" aria-hidden="true"></div>
   <div class="showcase-card"><div class="showcase-photo" id="photoFallback">
-   <video id="revealVideo" class="diwali-video" playsinline preload="auto" aria-label="Diwali surprise video">
-    <source src="assets/diwali/jethalal-surprise.mp4" type="video/mp4">
+   <video id="revealVideo" class="diwali-video" playsinline webkit-playsinline preload="none" aria-label="Diwali surprise video">
+    <source src="assets/diwali/WhatsApp%20Video%202026-11-09%20at%208.26.55%20PM.mp4" type="video/mp4">
    </video>
    <div class="reveal-video-fallback hidden" id="revealVideoFallback">Tap to play your Diwali surprise</div>
   </div><div class="showcase-caption" id="showcaseCaption">A little surprise for Someone Special</div></div>
@@ -358,15 +358,22 @@ button,input,textarea{font:inherit}button{cursor:pointer}
  function openReveal(){
   if(opened)return;opened=true;
   const revealVideo=$("revealVideo");
-  // Begin muted inside the OPEN gesture to unlock playback on mobile browsers.
-  // Restart from frame zero and unmute when the curtain has fully opened.
-  revealVideo.pause();revealVideo.currentTime=0;revealVideo.muted=true;revealVideo.defaultMuted=true;revealVideo.volume=1;
+  // Load only after OPEN and start original clip audio from the user's tap.
+  revealVideo.pause();
+  revealVideo.muted=false;revealVideo.defaultMuted=false;revealVideo.volume=1;
+  revealVideo.currentTime=0;
+  revealVideo.load();
   const playPromise=revealVideo.play();
-  if(playPromise&&playPromise.catch)playPromise.catch(()=>{$("revealVideoFallback").classList.remove("hidden");revealVideo.controls=true;status("Tap the video inside the golden frame to start playback.")});
+  if(playPromise&&playPromise.catch)playPromise.catch(()=>{
+   $("revealVideoFallback").classList.remove("hidden");
+   revealVideo.controls=true;
+   status("Tap play in the golden frame to start the video with sound.");
+  });
   $("opening").classList.add("curtain-open");$("openingUI").classList.add("dismiss");
   setTimeout(()=>{
-   revealVideo.currentTime=0;revealVideo.muted=false;revealVideo.defaultMuted=false;
-   $("opening").classList.add("leave");$("photoShow").classList.add("active");startPhotoShow();
+   $("opening").classList.add("leave");
+   $("photoShow").classList.add("active");
+   startPhotoShow();
   },1550);
  }
  $("openBtn").addEventListener("click",openReveal);
