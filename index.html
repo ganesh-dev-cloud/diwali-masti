@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#270710"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="description" content="A cinematic, personalized Diwali surprise."><meta property="og:type" content="website"><meta property="og:title" content="Shubho Dipaboli · A little surprise"><meta property="og:description" content="Open the curtains for a little Diwali magic."><meta property="og:image" content="https://ganesh-dev-cloud.github.io/diwali-masti/assets/diwali/og-preview.svg"><meta property="og:image:type" content="image/svg+xml"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./assets/diwali/app-icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="./assets/diwali/app-icon.svg">
+<meta name="description" content="A cinematic, personalized Diwali surprise."><meta property="og:type" content="website"><meta property="og:title" content="Shubho Dipaboli · A little surprise"><meta property="og:description" content="Open the curtains for a little Diwali magic."><meta property="og:url" content="https://ganesh-dev-cloud.github.io/diwali-masti/"><meta property="og:image:alt" content="A golden-framed Diwali welcome greeting."><meta property="og:image" content="https://ganesh-dev-cloud.github.io/diwali-masti/assets/diwali/og-preview.svg"><meta property="og:image:type" content="image/svg+xml"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./assets/diwali/app-icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="./assets/diwali/app-icon.svg">
 <title>Shubho Dipaboli · A little surprise</title>
 <style>
 :root{
@@ -213,7 +213,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 .hanuman{translate:calc(var(--welcome-x,0)*.92px) calc(var(--welcome-y,0)*.92px)}
 .hanuman{filter:drop-shadow(0 0 15px #f5a13c44) drop-shadow(0 5px 8px #050207a8)}
 .qr-panel{display:grid;justify-items:center;gap:7px;margin:13px auto 0;padding:12px;width:fit-content;border-radius:14px;background:#fff;color:#28101a;font-size:.65rem;font-weight:800}.qr-panel.hidden{display:none!important}.qr-panel img{width:132px;height:132px}
-@media(prefers-reduced-motion:reduce){.curtain-panel:after,.bunting,.video-loader,.video-loader span{animation:none!important}.light-beam{filter:none}}
+@media(prefers-reduced-motion:reduce){.curtain-panel:after,.bunting,.video-loader,.video-loader span,.light-beam,.hanuman-mode .sun,.hanuman-mode .hanuman{animation:none!important}.light-beam{filter:none}}
 
 </style>
 </head>
@@ -296,7 +296,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}
   </svg>
   <span class="ornament-hint">TAP FOR SPARK</span>
  </button>
- <div id="finalWish"><div class="final-label">A wish made especially for you</div><h2 id="closingName">Someone Special</h2><p id="closingWish">May your home glow with happiness, your heart sparkle with hope, and your days be filled with laughter and love. Wishing you and your family a beautiful Diwali!</p><div class="signature">Shubho Dipaboli</div><div class="share-actions"><button class="action primary" id="shareBtn">Share greeting ↗</button><button class="action" id="whatsappBtn">WhatsApp</button><button class="action" id="copyBtn">Copy link</button><button class="action" id="qrBtn">QR code</button><button class="action" id="downloadImageBtn">Download card</button><button class="action" id="installBtn" hidden>Install app</button><button class="action" id="downloadBtn">Download page</button><button class="action" id="replayBtn">Replay ✦</button></div><div id="qrPanel" class="qr-panel hidden"><div id="qrCode"></div><span>Scan to open this greeting</span></div><p id="status" aria-live="polite"></p></div>
+ <div id="finalWish"><div class="final-label">A wish made especially for you</div><h2 id="closingName">Someone Special</h2><p id="closingWish">May your home glow with happiness, your heart sparkle with hope, and your days be filled with laughter and love. Wishing you and your family a beautiful Diwali!</p><div class="signature">Shubho Dipaboli</div><div class="share-actions"><button class="action primary" id="shareBtn">Share greeting ↗</button><button class="action" id="whatsappBtn">☏ WhatsApp</button><button class="action" id="copyBtn">▣ Copy link</button><button class="action" id="qrBtn">▦ QR code</button><button class="action" id="downloadImageBtn">↓ Download card</button><button class="action" id="installBtn" hidden>Install app</button><button class="action" id="downloadBtn">Download page</button><button class="action" id="replayBtn">Replay ✦</button></div><div id="qrPanel" class="qr-panel hidden"><div id="qrCode"></div><span>Scan to open this greeting</span></div><p id="status" aria-live="polite"></p></div>
 </section>
 
 <script>
@@ -410,7 +410,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 </script>
 <script>
 (()=>{const $=id=>document.getElementById(id),reduced=matchMedia("(prefers-reduced-motion:reduce)").matches;let step=0,opened=false,ambientDots=[],ambientCtx=null,ambientRaf=0,particles=[],sparkRaf=0,taps=0,tapTimer=0,audioCtx=null,logoDone=false,logoTimer=0,installPrompt=null;
-const name=()=>$("nameInput").value.trim()||"Someone Special",wish=()=>$("wishInput").value.trim()||"Wishing you a joyful Diwali!",photo=()=>$("recipientPhoto").src.startsWith("data:")?$("recipientPhoto").src:"";
+const name=()=>$("nameInput").value.trim()||"Someone Special",wish=()=>$("wishInput").value.trim()||"Wishing you a joyful Diwali!",photo=()=>$("recipientPhoto").src.startsWith("data:")?$("recipientPhoto").src:"";$("previewName").textContent=name();
 function showStep(n){step=Math.max(0,Math.min(3,n));document.querySelectorAll(".form-step").forEach(e=>e.classList.toggle("active",+e.dataset.step===step));document.querySelectorAll("[data-step-dot]").forEach(e=>+e.dataset.stepDot===step?e.setAttribute("aria-current","step"):e.removeAttribute("aria-current"));$("backStep").disabled=step===0;$("nextStep").textContent=step===3?"Play surprise ✨":"Continue →"}
 function lazyMedia(){let v=$("revealVideo"),a=$("faahSound");if(!v.src){v.src=v.dataset.src;v.load()}if(!a.src){a.src=a.dataset.src;a.load()}}
 function openCurtain(){if(opened)return;opened=true;lazyMedia();$("opening").classList.add("curtain-open","personalizing");$("openingUI").classList.add("personalizing");showStep(0)}
