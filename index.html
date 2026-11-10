@@ -158,7 +158,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 .welcome-heading .hindi{font-size:inherit;letter-spacing:.015em;white-space:nowrap}
 .welcome-heading .hindi:after{content:"";display:block;width:54%;height:24px;margin:-1px 0 0 29%;border-bottom:5px solid #e5a63d;border-radius:0 0 80% 80%;transform:rotate(-9deg);opacity:.95}
 .sun{z-index:2;left:50%;bottom:8%;width:min(78vw,520px);opacity:0;display:block;transition:opacity .7s ease}
-.hanuman{z-index:4;left:50%;bottom:0;width:min(70vw,420px);opacity:0;display:block;transform:translateX(-50%) scale(.82);transition:opacity .7s ease}
+.hanuman{z-index:4;left:13%;bottom:0;width:min(42vw,245px);opacity:.32;display:block;transform:translateX(-50%) scale(.82);transition:opacity .7s ease,left .7s ease,width .7s ease}
 .skyline{z-index:3;height:clamp(105px,18vh,175px)}
 .hanging-ornament{z-index:7;right:13%;top:38%;width:clamp(55px,8vw,82px);height:clamp(118px,20vh,160px)}
 .ornament-hint{display:none}
@@ -170,7 +170,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}
  radial-gradient(ellipse at 50% 62%,#ff8c2d 0%,#c33a25 27%,#50131b 58%,#030306 82%),
  #030306}
 #welcome.hanuman-mode .sun{opacity:1;animation:sunBloom 3.6s ease both}
-#welcome.hanuman-mode .hanuman{opacity:1;transform:translateX(-50%) scale(1);animation:hanumanIdle 3.6s ease-in-out both}
+#welcome.hanuman-mode .hanuman{left:50%;width:min(70vw,420px);opacity:1;transform:translateX(-50%) scale(1);animation:hanumanIdle 3.6s ease-in-out both}
 #welcome.hanuman-mode .welcome-main{opacity:.08;transition:opacity .5s}
 #welcome.hanuman-mode .hanging-ornament{opacity:.15;transition:opacity .5s}
 @keyframes sunBloom{from{transform:translateX(-50%) scale(.45);filter:brightness(.5)}to{transform:translateX(-50%) scale(1);filter:brightness(1)}}
