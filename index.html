@@ -187,6 +187,15 @@ button,input,textarea{font:inherit}button{cursor:pointer}
  .skyline{height:100px}
 }
 
+
+/* Remove the unwanted multi-step personalization overlay from all screen sizes. */
+#openingUI .editor,
+.personalize-modal,.personalization-modal,.personalize-wizard,.personalization-wizard,
+.wizard-overlay,.wizard-modal,.stepper-form,.step-indicator,.live-preview-panel,
+#personalizeModal,#personalizationModal,#personalizeWizard,#personalizationWizard{
+ display:none!important;visibility:hidden!important;pointer-events:none!important
+}
+
 </style>
 </head>
 <body>
@@ -378,6 +387,25 @@ button,input,textarea{font:inherit}button{cursor:pointer}
  $("downloadBtn").addEventListener("click",()=>{let html="<!doctype html>\n"+document.documentElement.outerHTML;const a=html.indexOf("<!-- PERSONALIZATION_CONFIG_START -->"),b=html.indexOf("<!-- PERSONALIZATION_CONFIG_END -->");if(a<0||b<0){status("Could not prepare the personalized page.");return}const end=b+"<!-- PERSONALIZATION_CONFIG_END -->".length;const json=JSON.stringify(data).replace(/</g,"\\u003c");const block='<!-- PERSONALIZATION_CONFIG_START -->\n<script>window.PERSONALIZATION='+json+';</scr'+'ipt>\n<!-- PERSONALIZATION_CONFIG_END -->';html=html.slice(0,a)+block+html.slice(end);const blob=new Blob([html],{type:"text/html;charset=utf-8"}),url=URL.createObjectURL(blob),link=document.createElement("a"),slug=(data.name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,30)||"diwali");link.href=url;link.download="shubho-dipaboli-"+slug+".html";document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);status("Personalized HTML downloaded with your photo embedded.")});
   $("replayBtn").addEventListener("click",()=>{const revealVideo=$("revealVideo"),sound=$("faahSound");revealVideo.pause();revealVideo.currentTime=0;revealVideo.controls=false;$("revealVideoFallback").classList.add("hidden");sound.pause();sound.currentTime=0;sound.onended=null;opened=false;popped=false;logoTransitionStarted=false;clearTimeout(logoFallbackTimer);$("finalWish").classList.remove("show");$("ornamentBtn").classList.remove("popped");$("welcome").classList.remove("hanuman-mode");$("photoShow").classList.remove("active");$("welcome").classList.remove("active");$("opening").classList.remove("leave","curtain-open");$("openingUI").classList.remove("dismiss");$("brand").classList.remove("show");particles=[];ctx.clearRect(0,0,innerWidth,innerHeight);status("")});
 })();
+
+ // Defensive cleanup for stale/legacy personalization wizard markup.
+ function removeLegacyPersonalizeWizard(){
+  const candidates=[...document.querySelectorAll("body *")].filter(el=>{
+   if(el.children.length>8)return false;
+   const t=(el.innerText||"").replace(/\s+/g," ");
+   return /Who is this surprise for\?/i.test(t) && /1 Name/i.test(t) && /2 Photo/i.test(t) && /3 Wish/i.test(t) && /4 Preview/i.test(t);
+  });
+  for(const el of candidates){
+   let box=el;
+   for(let i=0;i<6&&box.parentElement;i++){
+    const r=box.getBoundingClientRect();
+    if(r.width>Math.min(420,innerWidth*.55)&&r.height>170){box.remove();break}
+    box=box.parentElement;
+   }
+  }
+ }
+ removeLegacyPersonalizeWizard();
+ document.addEventListener("DOMContentLoaded",removeLegacyPersonalizeWizard,{once:true});
 </script>
 </body>
 </html>
